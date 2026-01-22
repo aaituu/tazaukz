@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ТОО «Экопласт» - Завод инженерных систем - Изделия из полипропилена</title>
+    <title>
+      ТОО «Экопласт» - Завод инженерных систем - Изделия из полипропилена
+    </title>
     <link rel="icon" href="logo.png" type="image/png" />
     <link rel="apple-touch-icon" href="logo.png" />
     <link rel="shortcut icon" href="logo.png" type="image/x-icon" />
@@ -29,6 +31,7 @@
         --green: #5a7b46;
         --dark-green: #468232;
         --white: #ffffff;
+        --light-green-bg: #CADBB7; /* Новый: очень светлый прозрачный зеленый */
       }
 
       * {
@@ -105,12 +108,12 @@
         position: relative;
         overflow: hidden;
       }
-      
+
       .nav-link.phone {
         font-weight: 600;
         white-space: nowrap;
       }
-      
+
       .nav-link:hover {
         color: var(--secondary-blue) !important;
         background-color: rgba(1, 55, 125, 0.05);
@@ -130,7 +133,7 @@
       }
 
       .nav-link.active::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
@@ -237,7 +240,7 @@
           width: 100%;
           text-align: center;
         }
-        
+
         .company-tagline {
           font-size: 12px;
         }
@@ -258,10 +261,8 @@
 
       /* Hero Section */
       .hero {
-        background: linear-gradient(
-            rgba(1, 55, 125, 0.8),
-            rgba(0, 157, 209, 0.7)
-          ),
+        background:
+          linear-gradient(rgba(1, 55, 125, 0.8), rgba(0, 157, 209, 0.7)),
           url("banner.png");
         background-size: cover;
         background-position: center;
@@ -508,7 +509,7 @@
       }
 
       .service-grid-image::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
@@ -529,7 +530,7 @@
       }
 
       .service-grid-content::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
@@ -580,7 +581,7 @@
       }
 
       .service-grid-btn::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
@@ -589,7 +590,9 @@
         border-radius: 50%;
         background: var(--green);
         transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
+        transition:
+          width 0.6s,
+          height 0.6s;
         z-index: -1;
       }
 
@@ -612,17 +615,24 @@
 
       /* Special highlight effect on hover */
       .service-grid-item::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
         width: 0;
         height: 0;
-        background: radial-gradient(circle, rgba(151, 231, 245, 0.2) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(151, 231, 245, 0.2) 0%,
+          transparent 70%
+        );
         border-radius: 50%;
         transform: translate(-50%, -50%);
         opacity: 0;
-        transition: width 0.6s, height 0.6s, opacity 0.6s;
+        transition:
+          width 0.6s,
+          height 0.6s,
+          opacity 0.6s;
         z-index: 0;
       }
 
@@ -633,11 +643,19 @@
       }
 
       .service-grid-item.green-highlight:hover::after {
-        background: radial-gradient(circle, rgba(90, 123, 70, 0.15) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(90, 123, 70, 0.15) 0%,
+          transparent 70%
+        );
       }
 
       .service-grid-item.blue-highlight:hover::after {
-        background: radial-gradient(circle, rgba(0, 157, 209, 0.15) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(0, 157, 209, 0.15) 0%,
+          transparent 70%
+        );
       }
 
       /* Gallery Section */
@@ -756,7 +774,7 @@
       }
 
       .submit-btn::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
@@ -765,7 +783,9 @@
         background: rgba(255, 255, 255, 0.2);
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
+        transition:
+          width 0.6s,
+          height 0.6s;
       }
 
       .submit-btn:hover::before {
@@ -842,7 +862,7 @@
         .contact-section {
           padding: 60px 0;
         }
-        
+
         .service-grid-item {
           margin-bottom: 20px;
         }
@@ -852,19 +872,19 @@
         .hero h1 {
           font-size: 2rem;
         }
-        
+
         .service-grid-image {
           height: 200px;
         }
-        
+
         .service-grid-content {
           padding: 20px;
         }
-        
+
         .gallery-item {
           height: 250px;
         }
-        
+
         .nav-link.active::before {
           animation: fadeIn 0.3s ease-out forwards;
         }
@@ -952,9 +972,170 @@
         transform: rotate(90deg);
         color: var(--light-blue);
       }
+      /* В начале стилей, в :root добавим новый цвет */
+
+      /* Изменение основного фона body */
+      body {
+        background-color: var(
+          --light-green-bg
+        ); /* Заменяем белый на светло-зеленый */
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* Для контейнеров с белым фоном оставляем белый, чтобы текст был читаем */
+      header {
+        background-color: var(--white);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        padding: 10px 0;
+        transition: all 0.3s ease;
+      }
+
+      .product-card {
+        background-color: var(--white); /* Карточки остаются белыми */
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s;
+        height: 100%;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+
+      .service-grid-item {
+        background-color: var(--white); /* Карточки услуг остаются белыми */
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        height: 100%;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 30px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      /* Hero секция - оставляем градиент синий */
+      .hero {
+        background:
+          linear-gradient(rgba(1, 55, 125, 0.8), rgba(0, 157, 209, 0.7)),
+          url("banner.png");
+        background-size: cover;
+        background-position: center;
+        color: var(--white);
+        padding: 180px 0 100px;
+        margin-top: 76px;
+      }
+
+      /* Секция услуг - меняем на светло-зеленый */
+      .services-grid-section {
+        padding: 100px 0;
+        background-color: rgb(232, 255, 218); /* Очень светлый прозрачный зеленый */
+      }
+
+      /* Галерея - оставляем белый */
+      .gallery-section {
+        padding: 100px 0;
+        background-color: var(--white);
+      }
+
+      /* О нас - меняем на чуть более насыщенный зеленый */
+      .about-section {
+        background-color: rgb(232, 255, 218); /* Светло-зеленый фон */
+        padding: 100px 0;
+      }
+
+      /* Контактная форма - оставляем белый */
+      .contact-section {
+        padding: 100px 0;
+        background-color: var(--white);
+      }
+
+      /* Футер - оставляем синий */
+      footer {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        padding: 60px 0 20px;
+        transition: all 0.3s ease;
+      }
+
+      /* Контактная форма внутри - оставляем светло-серый */
+      .contact-form {
+        background-color: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      /* Секция продуктов - меняем на светло-зеленый */
+      .products-section {
+        padding: 100px 0;
+        background-color: rgba(
+          90,
+          123,
+          70,
+          0.02
+        ); /* Очень светлый прозрачный зеленый */
+      }
+
+      /* Модальные окна - оставляем белые */
+      .product-modal-content {
+        background-color: var(--white);
+        max-width: 800px;
+        margin: 50px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        animation: modalFadeIn 0.5s;
+      }
+
+      /* Адаптивность - для мобильных немного усиливаем контрастность */
+      @media (max-width: 768px) {
+        body {
+          background-color: rgba(
+            90,
+            123,
+            70,
+            0.05
+          ); /* Немного насыщеннее на мобильных */
+        }
+
+        .services-grid-section,
+        .about-section,
+        .products-section {
+          background-color: rgba(
+            90,
+            123,
+            70,
+            0.06
+          ); /* Немного насыщеннее на мобильных */
+        }
+      }
+      /* После body стилей добавлю */
+      body {
+        background-color: var(--light-green-bg);
+        color: #333;
+        overflow-x: hidden;
+        /* Добавляем очень легкий градиент для красоты */
+        background-image:
+          radial-gradient(
+            circle at 10% 20%,
+            rgba(90, 123, 70, 0.02) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 90% 80%,
+            rgba(90, 123, 70, 0.02) 0%,
+            transparent 20%
+          );
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header & Navigation -->
     <header>
       <nav class="navbar navbar-expand-lg">
@@ -973,7 +1154,9 @@
                 height="50"
                 class="company-name d-none d-md-inline"
               />
-              <div class="company-tagline d-none d-md-block">Завод инженерных систем</div>
+              <div class="company-tagline d-none d-md-block">
+                Завод инженерных систем
+              </div>
             </div>
           </a>
 
@@ -990,11 +1173,11 @@
             <ul class="navbar-nav ms-auto position-relative">
               <!-- Индикатор для плавного перемещения -->
               <div class="nav-indicator" id="navIndicator"></div>
-              
+
               <li class="nav-item">
                 <a class="nav-link" href="#home">Главная</a>
               </li>
-              
+
               <li class="nav-item">
                 <a class="nav-link" href="#services">Услуги</a>
               </li>
@@ -1030,15 +1213,22 @@
         <div class="row align-items-center">
           <div class="col-lg-8" data-aos="fade-right">
             <h1>Завод инженерных систем «Экопласт»</h1>
-            <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: 600;">Изделия из полипропилена для систем водоотведения и очистки</h2>
+            <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: 600">
+              Изделия из полипропилена для систем водоотведения и очистки
+            </h2>
             <p>
-              Компания <strong>ТОО «Экопласт»</strong> - Завод инженерных систем предлагает
-              проектирование, изготовление и поставку надежных и долговечных
-              решений для коммунальных, промышленных и коммерческих объектов.
+              Компания <strong>ТОО «Экопласт»</strong> - Завод инженерных систем
+              предлагает проектирование, изготовление и поставку надежных и
+              долговечных решений для коммунальных, промышленных и коммерческих
+              объектов.
             </p>
             <button
               class="hero-btn"
-              onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})"
+              onclick="
+                document
+                  .getElementById('services')
+                  .scrollIntoView({ behavior: 'smooth' })
+              "
             >
               Наши услуги <i class="fas fa-arrow-down ms-2"></i>
             </button>
@@ -1053,20 +1243,34 @@
         <h2 class="section-title text-center" data-aos="fade-up">
           Наши услуги
         </h2>
-        
+
         <div class="row g-4">
           <!-- Row 1: 2 items -->
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <div class="service-grid-item green-highlight">
-              <div class="service-grid-image" style="background-image: url('img/proektirovanie.jpeg');"></div>
+              <div
+                class="service-grid-image"
+                style="
+                  background-image: url(&quot;img/proektirovanie.jpeg&quot;);
+                "
+              ></div>
               <div class="service-grid-content">
-                <h3 class="service-grid-title">Проектирование инженерных систем</h3>
+                <h3 class="service-grid-title">
+                  Проектирование инженерных систем
+                </h3>
                 <p class="service-grid-description">
-                  Разработка индивидуальных проектов КНС, очистных сооружений, 
-                  систем пожаротушения и повышения давления с учетом всех 
+                  Разработка индивидуальных проектов КНС, очистных сооружений,
+                  систем пожаротушения и повышения давления с учетом всех
                   технических требований и условий эксплуатации.
                 </p>
-                <button class="service-grid-btn" onclick="showApplicationFormForService('Проектирование инженерных систем')">
+                <button
+                  class="service-grid-btn"
+                  onclick="
+                    showApplicationFormForService(
+                      'Проектирование инженерных систем',
+                    )
+                  "
+                >
                   Заказать услугу
                 </button>
               </div>
@@ -1075,15 +1279,27 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
             <div class="service-grid-item blue-highlight">
-              <div class="service-grid-image" style="background-image: url('img/soz.jpeg');"></div>
+              <div
+                class="service-grid-image"
+                style="background-image: url(&quot;img/soz.jpeg&quot;)"
+              ></div>
               <div class="service-grid-content">
-                <h3 class="service-grid-title">Изготовление изделий из полипропилена</h3>
+                <h3 class="service-grid-title">
+                  Изготовление изделий из полипропилена
+                </h3>
                 <p class="service-grid-description">
-                  Производство КНС, жироуловителей, пескоуловителей, очистных 
-                  сооружений и технологических емкостей на собственном современном 
-                  оборудовании с контролем качества на всех этапах.
+                  Производство КНС, жироуловителей, пескоуловителей, очистных
+                  сооружений и технологических емкостей на собственном
+                  современном оборудовании с контролем качества на всех этапах.
                 </p>
-                <button class="service-grid-btn" onclick="showApplicationFormForService('Изготовление изделий из полипропилена')">
+                <button
+                  class="service-grid-btn"
+                  onclick="
+                    showApplicationFormForService(
+                      'Изготовление изделий из полипропилена',
+                    )
+                  "
+                >
                   Заказать услугу
                 </button>
               </div>
@@ -1093,16 +1309,28 @@
           <!-- Row 2: 2 items -->
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-grid-item green-highlight">
-              <div class="service-grid-image" style="background-image: url('img/pavilion.jpeg');"></div>
+              <div
+                class="service-grid-image"
+                style="background-image: url(&quot;img/pavilion.jpeg&quot;)"
+              ></div>
               <div class="service-grid-content">
-                <h3 class="service-grid-title">Изготовление технических павильонов</h3>
+                <h3 class="service-grid-title">
+                  Изготовление технологических павильонов
+                </h3>
                 <p class="service-grid-description">
-                  Производство защитных павильонов для оборудования, 
-                  КТП, распределительных устройств с индивидуальными 
-                  размерами и комплектацией. Павильоны из полипропилена 
-                  устойчивы к коррозии и внешним воздействиям.
+                  Производство защитных павильонов для оборудования, КТП,
+                  распределительных устройств с индивидуальными размерами и
+                  комплектацией. Павильоны из полипропилена устойчивы к коррозии
+                  и внешним воздействиям.
                 </p>
-                <button class="service-grid-btn" onclick="showApplicationFormForService('Изготовление технических павильонов')">
+                <button
+                  class="service-grid-btn"
+                  onclick="
+                    showApplicationFormForService(
+                      'Изготовление технологических павильонов',
+                    )
+                  "
+                >
                   Заказать услугу
                 </button>
               </div>
@@ -1111,15 +1339,27 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
             <div class="service-grid-item blue-highlight">
-              <div class="service-grid-image" style="background-image: url('img/pojar.jpeg');"></div>
+              <div
+                class="service-grid-image"
+                style="background-image: url(&quot;img/pojar.jpeg&quot;)"
+              ></div>
               <div class="service-grid-content">
-                <h3 class="service-grid-title">Станции пожаротушения и повышения давления</h3>
+                <h3 class="service-grid-title">
+                  Станции пожаротушения и повышения давления
+                </h3>
                 <p class="service-grid-description">
-                  Изготовление насосных станций пожаротушения и повышения 
-                  давления из полипропилена. Индивидуальное проектирование 
-                  под конкретные требования по расходу и напору.
+                  Изготовление насосных станций пожаротушения и повышения
+                  давления из полипропилена. Индивидуальное проектирование под
+                  конкретные требования по расходу и напору.
                 </p>
-                <button class="service-grid-btn" onclick="showApplicationFormForService('Станции пожаротушения и повышения давления')">
+                <button
+                  class="service-grid-btn"
+                  onclick="
+                    showApplicationFormForService(
+                      'Станции пожаротушения и повышения давления',
+                    )
+                  "
+                >
                   Заказать услугу
                 </button>
               </div>
@@ -1129,15 +1369,23 @@
           <!-- Row 3: 2 items -->
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
             <div class="service-grid-item green-highlight">
-              <div class="service-grid-image" style="background-image: url('img/pogreb.jpeg');"></div>
+              <div
+                class="service-grid-image"
+                style="background-image: url(&quot;img/pogreb.jpeg&quot;)"
+              ></div>
               <div class="service-grid-content">
                 <h3 class="service-grid-title">Изготовление погребов</h3>
                 <p class="service-grid-description">
-                  Производство полипропиленовых погребов для хранения 
-                  овощей и консервации. Герметичные конструкции с 
-                  вентиляцией, устойчивые к влаге и перепадам температур.
+                  Производство полипропиленовых погребов для хранения овощей и
+                  консервации. Герметичные конструкции с вентиляцией, устойчивые
+                  к влаге и перепадам температур.
                 </p>
-                <button class="service-grid-btn" onclick="showApplicationFormForService('Изготовление погребов')">
+                <button
+                  class="service-grid-btn"
+                  onclick="
+                    showApplicationFormForService('Изготовление погребов')
+                  "
+                >
                   Заказать услугу
                 </button>
               </div>
@@ -1146,15 +1394,23 @@
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="350">
             <div class="service-grid-item blue-highlight">
-              <div class="service-grid-image" style="background-image: url('img/montaj.jpeg');"></div>
+              <div
+                class="service-grid-image"
+                style="background-image: url(&quot;img/montaj.jpeg&quot;)"
+              ></div>
               <div class="service-grid-content">
                 <h3 class="service-grid-title">Монтаж и пусконаладка</h3>
                 <p class="service-grid-description">
-                  Профессиональный монтаж оборудования на объекте заказчика, 
-                  пусконаладка, тестирование систем и обучение персонала. 
-                  Полный комплекс услуг "под ключ".
+                  Профессиональный монтаж оборудования на объекте заказчика,
+                  пусконаладка, тестирование систем и обучение персонала. Полный
+                  комплекс услуг "под ключ".
                 </p>
-                <button class="service-grid-btn" onclick="showApplicationFormForService('Монтаж и пусконаладка')">
+                <button
+                  class="service-grid-btn"
+                  onclick="
+                    showApplicationFormForService('Монтаж и пусконаладка')
+                  "
+                >
                   Заказать услугу
                 </button>
               </div>
@@ -1170,61 +1426,85 @@
         <h2 class="section-title text-center" data-aos="fade-up">
           Наше производство и объекты
         </h2>
-        
+
         <div class="row">
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="gallery-item" onclick="openGalleryModal('img/ceh.jpeg', 'Производственный цех')">
-              <img src="img/ceh.jpeg" alt="Производственный цех">
+            <div
+              class="gallery-item"
+              onclick="openGalleryModal('img/ceh.jpeg', 'Производственный цех')"
+            >
+              <img src="img/ceh.jpeg" alt="Производственный цех" />
               <div class="gallery-overlay">
                 <h5>Производственный цех</h5>
                 <p>Современное оборудование для сварки полипропилена</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
-            <div class="gallery-item" onclick="openGalleryModal('img/product.jpeg', 'Готовая продукция')">
-              <img src="img/product.jpeg" alt="Готовая продукция">
+            <div
+              class="gallery-item"
+              onclick="
+                openGalleryModal('img/product.jpeg', 'Готовая продукция')
+              "
+            >
+              <img src="img/product.jpeg" alt="Готовая продукция" />
               <div class="gallery-overlay">
                 <h5>Готовая продукция</h5>
                 <p>КНС и очистные сооружения на складе готовой продукции</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="gallery-item" onclick="openGalleryModal('img/otgruzka.jpg', 'Отгрузка оборудования')">
-              <img src="img/otgruzka.jpg" alt="Отгрузка оборудования">
+            <div
+              class="gallery-item"
+              onclick="
+                openGalleryModal('img/otgruzka.jpg', 'Отгрузка оборудования')
+              "
+            >
+              <img src="img/otgruzka.jpg" alt="Отгрузка оборудования" />
               <div class="gallery-overlay">
                 <h5>Отгрузка оборудования</h5>
                 <p>Подготовка к отправке заказчику</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="250">
-            <div class="gallery-item" onclick="openGalleryModal('img/montaj.jpeg', 'Объект монтажа')">
-              <img src="img/montaj.jpeg" alt="Объект монтажа">
+            <div
+              class="gallery-item"
+              onclick="openGalleryModal('img/montaj.jpeg', 'Объект монтажа')"
+            >
+              <img src="img/montaj.jpeg" alt="Объект монтажа" />
               <div class="gallery-overlay">
                 <h5>Объект монтажа</h5>
                 <p>Установка оборудования на объекте заказчика</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-            <div class="gallery-item" onclick="openGalleryModal('img/chek.jpeg', 'Контроль качества')">
-              <img src="img/chek.jpeg" alt="Контроль качества">
+            <div
+              class="gallery-item"
+              onclick="openGalleryModal('img/chek.jpeg', 'Контроль качества')"
+            >
+              <img src="img/chek.jpeg" alt="Контроль качества" />
               <div class="gallery-overlay">
                 <h5>Контроль качества</h5>
                 <p>Проверка швов и герметичности</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-md-4" data-aos="fade-up" data-aos-delay="350">
-            <div class="gallery-item" onclick="openGalleryModal('img/progres.jpg', 'Изделия в производстве')">
-              <img src="img/progres.jpg" alt="Изделия в производстве">
+            <div
+              class="gallery-item"
+              onclick="
+                openGalleryModal('img/progres.jpg', 'Изделия в производстве')
+              "
+            >
+              <img src="img/progres.jpg" alt="Изделия в производстве" />
               <div class="gallery-overlay">
                 <h5>Изделия в производстве</h5>
                 <p>Технологические емкости на разных этапах изготовления</p>
@@ -1237,8 +1517,10 @@
 
     <!-- Gallery Modal -->
     <div id="galleryModal" class="gallery-modal">
-      <button class="close-gallery-modal" onclick="closeGalleryModal()">&times;</button>
-      <img id="galleryModalImage" class="gallery-modal-content" src="" alt="">
+      <button class="close-gallery-modal" onclick="closeGalleryModal()">
+        &times;
+      </button>
+      <img id="galleryModalImage" class="gallery-modal-content" src="" alt="" />
       <div id="galleryModalCaption" class="gallery-modal-caption"></div>
     </div>
 
@@ -1250,11 +1532,20 @@
         </h2>
         <div class="row g-4">
           <!-- Product 1 - КНС -->
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <div class="product-card" onclick="showProductDetails('kns')">
-              <div class="product-img" style="background-image: url('kanal.jpg')"></div>
+              <div
+                class="product-img"
+                style="background-image: url(&quot;kanal.jpg&quot;)"
+              ></div>
               <div class="product-content">
-                <h3 class="product-title">Канализационные насосные станции (КНС)</h3>
+                <h3 class="product-title">
+                  Канализационные насосные станции (КНС)
+                </h3>
                 <p class="product-description">
                   Надежные системы для перекачки сточных вод с индивидуальным
                   проектированием.
@@ -1264,9 +1555,16 @@
           </div>
 
           <!-- Product 2 - Жироуловители -->
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
             <div class="product-card" onclick="showProductDetails('grease')">
-              <div class="product-img" style="background-image: url('jir1.jpg')"></div>
+              <div
+                class="product-img"
+                style="background-image: url(&quot;jir1.jpg&quot;)"
+              ></div>
               <div class="product-content">
                 <h3 class="product-title">Жироуловители</h3>
                 <p class="product-description">
@@ -1278,9 +1576,16 @@
           </div>
 
           <!-- Product 3 - Пескоуловители -->
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <div class="product-card" onclick="showProductDetails('sand')">
-              <div class="product-img" style="background-image: url('pesok.jpg')"></div>
+              <div
+                class="product-img"
+                style="background-image: url(&quot;pesok.jpg&quot;)"
+              ></div>
               <div class="product-content">
                 <h3 class="product-title">Пескоуловители</h3>
                 <p class="product-description">
@@ -1291,9 +1596,16 @@
           </div>
 
           <!-- Product 4 - Очистные сооружения -->
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
             <div class="product-card" onclick="showProductDetails('cleaning')">
-              <div class="product-img" style="background-image: url('ochist.jpeg')"></div>
+              <div
+                class="product-img"
+                style="background-image: url(&quot;ochist.jpeg&quot;)"
+              ></div>
               <div class="product-content">
                 <h3 class="product-title">Очистные сооружения</h3>
                 <p class="product-description">
@@ -1304,9 +1616,16 @@
           </div>
 
           <!-- Product 5 - Технологические емкости -->
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
             <div class="product-card" onclick="showProductDetails('tanks')">
-              <div class="product-img" style="background-image: url('emkost.jpeg')"></div>
+              <div
+                class="product-img"
+                style="background-image: url(&quot;emkost.jpeg&quot;)"
+              ></div>
               <div class="product-content">
                 <h3 class="product-title">Технологические емкости</h3>
                 <p class="product-description">
@@ -1318,9 +1637,16 @@
           </div>
 
           <!-- Product 6 - Комплектующие -->
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="350">
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="350"
+          >
             <div class="product-card" onclick="showProductDetails('complex')">
-              <div class="product-img" style="background-image: url('komplekt.jpeg')"></div>
+              <div
+                class="product-img"
+                style="background-image: url(&quot;komplekt.jpeg&quot;)"
+              ></div>
               <div class="product-content">
                 <h3 class="product-title">Комплектующие</h3>
                 <p class="product-description">
@@ -1431,17 +1757,28 @@
             <h2 class="section-title">Контакты</h2>
             <div class="mb-4">
               <h4 style="color: var(--primary-blue)">ТОО «Экопласт»</h4>
-              <h5 style="color: var(--secondary-blue)">Завод инженерных систем</h5>
+              <h5 style="color: var(--secondary-blue)">
+                Завод инженерных систем
+              </h5>
               <p>
-                <i class="fas fa-map-marker-alt me-2" style="color: var(--secondary-blue)"></i>
+                <i
+                  class="fas fa-map-marker-alt me-2"
+                  style="color: var(--secondary-blue)"
+                ></i>
                 г. Астана, ул. Жанибека Тархана, 2
               </p>
               <p>
-                <i class="fas fa-phone me-2" style="color: var(--secondary-blue)"></i>
+                <i
+                  class="fas fa-phone me-2"
+                  style="color: var(--secondary-blue)"
+                ></i>
                 8 (776) 167-20-71, 8 (778) 557-09-37
               </p>
               <p>
-                <i class="fas fa-envelope me-2" style="color: var(--secondary-blue)"></i>
+                <i
+                  class="fas fa-envelope me-2"
+                  style="color: var(--secondary-blue)"
+                ></i>
                 <span id="contact-email">too.ekoplast@yandex.kz</span>
               </p>
             </div>
@@ -1551,7 +1888,12 @@
         <div class="row">
           <div class="col-lg-4 mb-4">
             <h3 class="footer-title">ТОО «Экопласт»</h3>
-            <h4 class="footer-title" style="color: var(--light-blue); font-size: 1rem;">Завод инженерных систем</h4>
+            <h4
+              class="footer-title"
+              style="color: var(--light-blue); font-size: 1rem"
+            >
+              Завод инженерных систем
+            </h4>
             <p>
               Проектирование, изготовление и поставка изделий из полипропилена
               для систем водоотведения, очистки и инженерной инфраструктуры.
@@ -1567,8 +1909,30 @@
               <li><a href="#products">Продукция</a></li>
               <li><a href="#about">О нас</a></li>
               <li><a href="#contact">Контакты</a></li>
+              
             </ul>
           </div>
+          <!-- В футере добавлю новый блок после "Контакты" -->
+<div class="col-lg-4 mb-4">
+  <h3 class="footer-title">Опросные листы</h3>
+  <ul class="footer-links">
+    <li><a href="survey-kns.html">Опросный лист для подбора КНС</a></li>
+    <li>
+      <a href="survey-storm.html"
+        >Опросный лист для подбора очистных сооружений (ливневые стоки)</a
+      >
+    </li>
+    <li>
+      <a href="survey-domestic.html"
+        >Опросный лист для подбора очистных сооружений (хозбытовые стоки)</a
+      >
+    </li>
+    <li>
+      <a href="survey-control.html">Опросный лист для подбора шкафа управления</a>
+    </li>
+    <li><a href="survey-grease.html">Опросный лист для подбора жироуловителя</a></li>
+  </ul>
+</div>
 
           <div class="col-lg-4 mb-4">
             <h3 class="footer-title">Контакты</h3>
@@ -1588,7 +1952,10 @@
         </div>
 
         <div class="copyright">
-          <p>&copy; 2023 ТОО «Экопласт» - Завод инженерных систем. Все права защищены.</p>
+          <p>
+            &copy; 2023 ТОО «Экопласт» - Завод инженерных систем. Все права
+            защищены.
+          </p>
         </div>
       </div>
     </footer>
@@ -1738,12 +2105,12 @@
 
       // Функция для инициализации индикатора навигации
       function initNavIndicator() {
-        navIndicator = document.getElementById('navIndicator');
+        navIndicator = document.getElementById("navIndicator");
         if (navIndicator && !isNavIndicatorInitialized) {
           isNavIndicatorInitialized = true;
-          
+
           // Находим активную ссылку при загрузке
-          const activeLink = document.querySelector('.nav-link.active');
+          const activeLink = document.querySelector(".nav-link.active");
           if (activeLink) {
             updateNavIndicator(activeLink);
           }
@@ -1753,38 +2120,42 @@
       // Функция для обновления положения индикатора
       function updateNavIndicator(activeElement) {
         if (!navIndicator || !activeElement) return;
-        
-        const navItems = document.querySelectorAll('.nav-item:not(:has(.phone))');
+
+        const navItems = document.querySelectorAll(
+          ".nav-item:not(:has(.phone))",
+        );
         let activeIndex = -1;
-        
+
         // Находим индекс активного элемента
         navItems.forEach((item, index) => {
-          if (item.querySelector('.nav-link.active')) {
+          if (item.querySelector(".nav-link.active")) {
             activeIndex = index;
           }
         });
-        
+
         if (activeIndex === -1) return;
-        
+
         const activeItem = navItems[activeIndex];
-        const navLink = activeItem.querySelector('.nav-link');
-        
+        const navLink = activeItem.querySelector(".nav-link");
+
         // Получаем координаты и размеры
         const rect = navLink.getBoundingClientRect();
-        const navRect = activeItem.closest('.navbar-nav').getBoundingClientRect();
-        
+        const navRect = activeItem
+          .closest(".navbar-nav")
+          .getBoundingClientRect();
+
         // Устанавливаем позицию и размеры индикатора
         navIndicator.style.width = `${rect.width}px`;
         navIndicator.style.height = `${rect.height}px`;
         navIndicator.style.transform = `translateX(${rect.left - navRect.left}px)`;
-        navIndicator.classList.add('visible');
+        navIndicator.classList.add("visible");
       }
 
       // Функция для плавного обновления активного элемента
       function updateActiveNavLinkSmoothly() {
         const sections = document.querySelectorAll("section[id]");
         const navLinks = document.querySelectorAll(
-          ".navbar-nav .nav-link:not(.phone)"
+          ".navbar-nav .nav-link:not(.phone)",
         );
 
         let current = "";
@@ -1827,7 +2198,11 @@
         }
 
         // Обновляем индикатор только если активная ссылка изменилась
-        if (newActiveLink && newActiveLink !== currentActiveLink && window.innerWidth > 991) {
+        if (
+          newActiveLink &&
+          newActiveLink !== currentActiveLink &&
+          window.innerWidth > 991
+        ) {
           updateNavIndicator(newActiveLink);
         }
       }
@@ -1953,15 +2328,15 @@
 
       // Gallery functions
       function openGalleryModal(imageSrc, caption) {
-        document.getElementById('galleryModalImage').src = imageSrc;
-        document.getElementById('galleryModalCaption').innerHTML = caption;
-        document.getElementById('galleryModal').style.display = 'block';
-        document.body.style.overflow = 'hidden';
+        document.getElementById("galleryModalImage").src = imageSrc;
+        document.getElementById("galleryModalCaption").innerHTML = caption;
+        document.getElementById("galleryModal").style.display = "block";
+        document.body.style.overflow = "hidden";
       }
 
       function closeGalleryModal() {
-        document.getElementById('galleryModal').style.display = 'none';
-        document.body.style.overflow = 'auto';
+        document.getElementById("galleryModal").style.display = "none";
+        document.body.style.overflow = "auto";
       }
 
       // Show product details modal
@@ -2016,7 +2391,7 @@
 
           modalBody.insertBefore(
             newContent,
-            modalBody.querySelector(".text-center")
+            modalBody.querySelector(".text-center"),
           );
 
           document.getElementById("selectedProduct").value = "Общий запрос";
@@ -2064,7 +2439,7 @@
 
           modalBody.insertBefore(
             newContent,
-            modalBody.querySelector(".text-center")
+            modalBody.querySelector(".text-center"),
           );
 
           document.getElementById("selectedProduct").value = product.title;
@@ -2097,7 +2472,8 @@
       // Show application form for service
       function showApplicationFormForService(serviceName) {
         document.getElementById("selectedService").value = serviceName;
-        document.getElementById("modalComment").value = `Интересует услуга: ${serviceName}`;
+        document.getElementById("modalComment").value =
+          `Интересует услуга: ${serviceName}`;
         showApplicationForm();
       }
 
@@ -2130,7 +2506,7 @@
             const response = await emailjs.send(
               EMAILJS_CONFIG.SERVICE_ID,
               EMAILJS_CONFIG.TEMPLATE_ID,
-              templateParams
+              templateParams,
             );
 
             if (response.status === 200) {
@@ -2138,13 +2514,14 @@
               this.reset();
 
               setTimeout(() => {
-                document.getElementById("successMessage").style.display = "none";
+                document.getElementById("successMessage").style.display =
+                  "none";
               }, 5000);
             }
           } catch (error) {
             console.error("Ошибка отправки:", error);
             alert(
-              "Ошибка при отправке формы. Пожалуйста, позвоните нам по телефону."
+              "Ошибка при отправке формы. Пожалуйста, позвоните нам по телефону.",
             );
           } finally {
             setButtonLoading(submitBtn, false);
@@ -2166,10 +2543,14 @@
           const templateParams = {
             name: document.getElementById("modalName").value,
             phone: document.getElementById("modalPhone").value,
-            product: document.getElementById("selectedProduct").value || document.getElementById("selectedService").value,
+            product:
+              document.getElementById("selectedProduct").value ||
+              document.getElementById("selectedService").value,
             message: document.getElementById("modalComment").value,
             date: new Date().toLocaleString("ru-RU"),
-            productType: document.getElementById("selectedProduct").value || document.getElementById("selectedService").value,
+            productType:
+              document.getElementById("selectedProduct").value ||
+              document.getElementById("selectedService").value,
             email: "не указан",
           };
 
@@ -2177,7 +2558,7 @@
             const response = await emailjs.send(
               EMAILJS_CONFIG.SERVICE_ID,
               EMAILJS_CONFIG.TEMPLATE_ID,
-              templateParams
+              templateParams,
             );
 
             if (response.status === 200) {
@@ -2186,14 +2567,15 @@
               this.reset();
 
               setTimeout(() => {
-                document.getElementById("modalSuccessMessage").style.display = "none";
+                document.getElementById("modalSuccessMessage").style.display =
+                  "none";
                 closeApplicationModal();
               }, 3000);
             }
           } catch (error) {
             console.error("Ошибка отправки:", error);
             alert(
-              "Ошибка при отправке формы. Пожалуйста, позвоните нам по телефону."
+              "Ошибка при отправке формы. Пожалуйста, позвоните нам по телефону.",
             );
           } finally {
             submitBtn.innerHTML = originalText;
@@ -2285,25 +2667,25 @@
       });
 
       // Обновляем индикатор при изменении размера окна
-      window.addEventListener('resize', function() {
+      window.addEventListener("resize", function () {
         if (window.innerWidth > 991) {
           initNavIndicator();
-          const activeLink = document.querySelector('.nav-link.active');
+          const activeLink = document.querySelector(".nav-link.active");
           if (activeLink) {
             updateNavIndicator(activeLink);
           }
         } else {
           if (navIndicator) {
-            navIndicator.classList.remove('visible');
+            navIndicator.classList.remove("visible");
           }
         }
       });
 
       // Инициализация при полной загрузке страницы
-      window.addEventListener('load', function() {
+      window.addEventListener("load", function () {
         initNavIndicator();
         updateActiveNavLinkSmoothly();
       });
     </script>
-</body>
+  </body>
 </html>

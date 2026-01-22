@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Опросный лист для очистных сооружений (хозбытовые стоки) - ТОО «Экопласт»</title>
+    <link rel="icon" href="logo.png" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #00263d;
+            --secondary-blue: #009dd1;
+            --green: #5a7b46;
+            --dark-green: #468232;
+            --white: #ffffff;
+            --light-green-bg: #f8fff0;
+        }
+        
+        body {
+            background-color: var(--light-green-bg);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 80px;
+        }
+        
+        .survey-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .survey-form {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .form-section {
+            border-left: 4px solid var(--secondary-blue);
+            padding-left: 20px;
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        .form-title {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        
+        .form-label {
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        
+        .submit-btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(70, 130, 50, 0.3);
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(0, 157, 209, 0.25);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .survey-form {
+                padding: 20px;
+            }
+            
+            .form-section {
+                padding: 15px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-buttons button {
+                width: 100%;
+            }
+        }
+        
+        .capacity-info {
+            background: #e8ffda;
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .capacity-info h6 {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header style="background-color: white; box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.png" alt="Экопласт" height="50">
+                    <span style="font-weight: 600; color: var(--primary-blue);">ТОО «Экопласт»</span>
+                </a>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='surveys.html'">
+                        <i class="fas fa-list me-1"></i>Все опросы
+                    </button>
+                    <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='index.html'">
+                        <i class="fas fa-home me-1"></i>На главную
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="survey-container">
+        <div class="text-center mb-5 pt-4">
+            <h1 class="display-5 fw-bold" style="color: var(--primary-blue);">Опросный лист для подбора очистных сооружений</h1>
+            <h2 class="h4 text-muted mb-4">для хозяйственно-бытовых и промышленных стоков</h2>
+            <p class="lead">Заполните форму для проектирования очистных сооружений для хозяйственно-бытовых и промышленных стоков</p>
+        </div>
+
+        <div class="survey-form">
+            <form id="domesticSurveyForm">
+                <!-- Информация о производительности -->
+                <div class="capacity-info">
+                    <h6><i class="fas fa-info-circle me-2"></i>Как определить производительность:</h6>
+                    <p class="mb-2 small">Для жилых объектов: 200 л/сутки на человека × количество жителей</p>
+                    <p class="mb-2 small">Для предприятий общепита: 25 л/сутки на одно посадочное место</p>
+                    <p class="mb-0 small">Для гостиниц: 250 л/сутки на один номер</p>
+                </div>
+
+                <!-- Контактная информация -->
+                <div class="form-section">
+                    <h3 class="form-title">Контактная информация</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label required">ФИО</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Телефон</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">E-Mail</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Дата заполнения</label>
+                            <input type="date" class="form-control" id="date" value="<?php echo date('Y-m-d'); ?>">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Компания / Организация</label>
+                            <input type="text" class="form-control" id="company">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Основные вопросы -->
+                <div class="form-section">
+                    <h3 class="form-title">ОСНОВНЫЕ ВОПРОСЫ</h3>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label required">Адрес объекта</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Тип объекта</label>
+                            <select class="form-control" id="objectType" required>
+                                <option value="">Выберите тип</option>
+                                <option value="частный дом">Частный дом</option>
+                                <option value="коттеджный поселок">Коттеджный поселок</option>
+                                <option value="гостиница">Гостиница</option>
+                                <option value="ресторан/кафе">Ресторан/Кафе</option>
+                                <option value="торговый центр">Торговый центр</option>
+                                <option value="офисное здание">Офисное здание</option>
+                                <option value="промышленное предприятие">Промышленное предприятие</option>
+                                <option value="больница">Больница</option>
+                                <option value="школа">Школа</option>
+                                <option value="детский сад">Детский сад</option>
+                                <option value="спортивный комплекс">Спортивный комплекс</option>
+                                <option value="другое">Другое</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Количество пользователей</label>
+                            <input type="number" class="form-control" id="usersCount" required min="1">
+                            <small class="text-muted">Количество человек, которые будут пользоваться канализацией</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Производительность, м³/сутки</label>
+                            <input type="number" class="form-control" id="dailyCapacity" step="0.1" required>
+                            <small class="text-muted">Объем сточных вод в сутки</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Залповый сброс, м³/ч</label>
+                            <input type="number" class="form-control" id="peakFlow" step="0.1">
+                            <small class="text-muted">Максимальный одновременный сброс</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Характеристики стоков -->
+                <div class="form-section">
+                    <h3 class="form-title">ХАРАКТЕРИСТИКИ СТОКОВ</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Тип стоков</label>
+                            <select class="form-control" id="wasteType">
+                                <option value="">Выберите тип</option>
+                                <option value="бытовые">Хозяйственно-бытовые</option>
+                                <option value="промышленные">Промышленные</option>
+                                <option value="смешанные">Смешанные</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Наличие специфических загрязнений</label>
+                            <select class="form-control" id="specificPollutants">
+                                <option value="нет">Нет</option>
+                                <option value="химические">Химические реагенты</option>
+                                <option value="медицинские">Медицинские отходы</option>
+                                <option value="пищевые">Пищевые отходы</option>
+                                <option value="другие">Другие</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Температура стоков, °C</label>
+                            <input type="number" class="form-control" id="waterTemperature" value="20" step="0.1">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">pH стоков</label>
+                            <input type="number" class="form-control" id="phValue" value="7" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Параметры места установки -->
+                <div class="form-section">
+                    <h3 class="form-title">ПАРАМЕТРЫ МЕСТА УСТАНОВКИ</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label required">Исполнение очистных сооружений</label>
+                            <select class="form-control" id="constructionType" required>
+                                <option value="">Выберите исполнение</option>
+                                <option value="подземное">Подземное</option>
+                                <option value="наземное">Наземное</option>
+                                <option value="блочно-модульное">Блочно-модульное</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Глубина заложения лотка подводящего коллектора, м</label>
+                            <input type="number" class="form-control" id="inletDepth" step="0.1">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Диаметр подводящего коллектора, мм</label>
+                            <input type="number" class="form-control" id="inletDiameter">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Подача сточных вод</label>
+                            <select class="form-control" id="waterSupply" required>
+                                <option value="">Выберите тип</option>
+                                <option value="самотеком">Самотеком</option>
+                                <option value="насосом">Насосом</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Отвод очищенных сточных вод</label>
+                            <select class="form-control" id="outletType" required>
+                                <option value="">Выберите тип</option>
+                                <option value="в водоем">В водоем</option>
+                                <option value="в дренаж">В дренаж</option>
+                                <option value="на рельеф">На рельеф</option>
+                                <option value="в ливневую канализацию">В ливневую канализацию</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Точка сброса очищенных сточных вод</label>
+                            <input type="text" class="form-control" id="dischargePoint" placeholder="Например: дренажная канава, река">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Параметры площадки (размеры, грунты, УГВ)</label>
+                            <textarea class="form-control" id="siteParams" rows="3" placeholder="Размеры площадки, тип грунта, уровень грунтовых вод, особенности..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Требования к качеству очистки -->
+                <div class="form-section">
+                    <h3 class="form-title">ТРЕБОВАНИЯ К КАЧЕСТВУ ОЧИСТКИ</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Показатели</th>
+                                    <th>На входе, мг/л</th>
+                                    <th>Требования на выходе, мг/л</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Взвешенные вещества</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="suspendedSolidsIn" value="300" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="suspendedSolidsOut" value="10" step="0.1"></td>
+                                </tr>
+                                <tr>
+                                    <td>БПК полн.</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="bpdIn" value="250" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="bpdOut" value="15" step="0.1"></td>
+                                </tr>
+                                <tr>
+                                    <td>ХПК</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="codIn" value="500" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="codOut" value="80" step="0.1"></td>
+                                </tr>
+                                <tr>
+                                    <td>Азот аммонийный</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="ammoniaIn" value="30" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="ammoniaOut" value="10" step="0.1"></td>
+                                </tr>
+                                <tr>
+                                    <td>Фосфаты</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="phosphatesIn" value="15" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="phosphatesOut" value="5" step="0.1"></td>
+                                </tr>
+                                <tr>
+                                    <td>ПАВ</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="surfactantsIn" value="10" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="surfactantsOut" value="2" step="0.1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label">Другие показатели или особые требования</label>
+                        <textarea class="form-control" id="otherRequirements" rows="2" placeholder="Дополнительные требования к очистке..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Дополнительное оборудование -->
+                <div class="form-section">
+                    <h3 class="form-title">ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="uvDisinfection">
+                                <label class="form-check-label" for="uvDisinfection">УФ-обеззараживание</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chlorination">
+                                <label class="form-check-label" for="chlorination">Хлорирование</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="sludgeDehydration">
+                                <label class="form-check-label" for="sludgeDehydration">Обезвоживание осадка</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="controlPanel">
+                                <label class="form-check-label" for="controlPanel">Шкаф управления</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="alarmSystem">
+                                <label class="form-check-label" for="alarmSystem">Система аварийной сигнализации</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="remoteControl">
+                                <label class="form-check-label" for="remoteControl">Дистанционное управление</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Дополнительные комментарии -->
+                <div class="form-section">
+                    <h3 class="form-title">ДОПОЛНИТЕЛЬНЫЕ КОММЕНТАРИИ</h3>
+                    <div class="mb-3">
+                        <label class="form-label">Особые требования, комментарии или дополнительные данные</label>
+                        <textarea class="form-control" id="comments" rows="4" placeholder="Укажите дополнительные требования, особенности объекта, пожелания..."></textarea>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" id="agree" required>
+                        <label class="form-check-label required" for="agree">
+                            Я согласен на обработку персональных данных
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <div class="text-center mt-5">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane me-2"></i>Отправить опросный лист
+                    </button>
+                </div>
+            </form>
+            
+            <div id="successMessage" class="alert alert-success mt-4 text-center" style="display: none;">
+                <i class="fas fa-check-circle me-2"></i> 
+                <strong>Ваш опросный лист отправлен!</strong><br>
+                Мы свяжемся с вами в ближайшее время для подготовки коммерческого предложения.
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Инициализация EmailJS
+        (function() {
+            emailjs.init("GuD2XBC894z6ShpZu");
+        })();
+
+        // Устанавливаем текущую дату
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+
+        // Автоматический расчет производительности
+        document.getElementById('usersCount').addEventListener('input', function() {
+            const users = parseInt(this.value) || 0;
+            const dailyCapacity = users * 0.2; // 200 литров = 0.2 м³ на человека
+            document.getElementById('dailyCapacity').value = dailyCapacity.toFixed(1);
+            
+            // Расчет залпового сброса (30% от суточного объема)
+            const peakFlow = dailyCapacity * 0.3 / 24; // м³/ч
+            document.getElementById('peakFlow').value = peakFlow.toFixed(2);
+        });
+
+        // Обработка формы
+        document.getElementById('domesticSurveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!document.getElementById('agree').checked) {
+                alert('Пожалуйста, дайте согласие на обработку персональных данных');
+                return;
+            }
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Отправка...';
+            submitBtn.disabled = true;
+
+            // Собираем данные формы
+            const formData = {
+                surveyType: 'Опросный лист для подбора очистных сооружений (хозбытовые стоки)',
+                fullName: document.getElementById('fullName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                date: document.getElementById('date').value,
+                company: document.getElementById('company').value,
+                address: document.getElementById('address').value,
+                objectType: document.getElementById('objectType').value,
+                usersCount: document.getElementById('usersCount').value,
+                dailyCapacity: document.getElementById('dailyCapacity').value,
+                peakFlow: document.getElementById('peakFlow').value,
+                wasteType: document.getElementById('wasteType').value,
+                specificPollutants: document.getElementById('specificPollutants').value,
+                waterTemperature: document.getElementById('waterTemperature').value,
+                phValue: document.getElementById('phValue').value,
+                constructionType: document.getElementById('constructionType').value,
+                inletDepth: document.getElementById('inletDepth').value,
+                inletDiameter: document.getElementById('inletDiameter').value,
+                waterSupply: document.getElementById('waterSupply').value,
+                outletType: document.getElementById('outletType').value,
+                dischargePoint: document.getElementById('dischargePoint').value,
+                siteParams: document.getElementById('siteParams').value,
+                suspendedSolidsIn: document.getElementById('suspendedSolidsIn').value,
+                suspendedSolidsOut: document.getElementById('suspendedSolidsOut').value,
+                bpdIn: document.getElementById('bpdIn').value,
+                bpdOut: document.getElementById('bpdOut').value,
+                codIn: document.getElementById('codIn').value,
+                codOut: document.getElementById('codOut').value,
+                ammoniaIn: document.getElementById('ammoniaIn').value,
+                ammoniaOut: document.getElementById('ammoniaOut').value,
+                phosphatesIn: document.getElementById('phosphatesIn').value,
+                phosphatesOut: document.getElementById('phosphatesOut').value,
+                surfactantsIn: document.getElementById('surfactantsIn').value,
+                surfactantsOut: document.getElementById('surfactantsOut').value,
+                otherRequirements: document.getElementById('otherRequirements').value,
+                uvDisinfection: document.getElementById('uvDisinfection').checked ? 'Да' : 'Нет',
+                chlorination: document.getElementById('chlorination').checked ? 'Да' : 'Нет',
+                sludgeDehydration: document.getElementById('sludgeDehydration').checked ? 'Да' : 'Нет',
+                controlPanel: document.getElementById('controlPanel').checked ? 'Да' : 'Нет',
+                alarmSystem: document.getElementById('alarmSystem').checked ? 'Да' : 'Нет',
+                remoteControl: document.getElementById('remoteControl').checked ? 'Да' : 'Нет',
+                comments: document.getElementById('comments').value,
+                submissionDate: new Date().toLocaleString('ru-RU')
+            };
+
+            try {
+                // Формируем сообщение
+                const message = `
+Тип опросного листа: ${formData.surveyType}
+
+КОНТАКТНАЯ ИНФОРМАЦИЯ:
+ФИО: ${formData.fullName}
+Телефон: ${formData.phone}
+Email: ${formData.email}
+Дата заполнения: ${formData.date}
+Компания: ${formData.company}
+
+ОСНОВНЫЕ ПАРАМЕТРЫ:
+Адрес объекта: ${formData.address}
+Тип объекта: ${formData.objectType}
+Количество пользователей: ${formData.usersCount} чел.
+Производительность: ${formData.dailyCapacity} м³/сутки
+Залповый сброс: ${formData.peakFlow} м³/ч
+
+ХАРАКТЕРИСТИКИ СТОКОВ:
+Тип стоков: ${formData.wasteType}
+Специфические загрязнения: ${formData.specificPollutants}
+Температура стоков: ${formData.waterTemperature} °C
+pH стоков: ${formData.phValue}
+
+ПАРАМЕТРЫ МЕСТА УСТАНОВКИ:
+Исполнение: ${formData.constructionType}
+Глубина заложения лотка: ${formData.inletDepth} м
+Диаметр коллектора: ${formData.inletDiameter} мм
+Подача сточных вод: ${formData.waterSupply}
+Отвод очищенных вод: ${formData.outletType}
+Точка сброса: ${formData.dischargePoint}
+Параметры площадки: ${formData.siteParams}
+
+ТРЕБОВАНИЯ К ОЧИСТКЕ:
+На входе / Требования на выходе:
+Взвешенные вещества: ${formData.suspendedSolidsIn} мг/л / ${formData.suspendedSolidsOut} мг/л
+БПК полн.: ${formData.bpdIn} мг/л / ${formData.bpdOut} мг/л
+ХПК: ${formData.codIn} мг/л / ${formData.codOut} мг/л
+Азот аммонийный: ${formData.ammoniaIn} мг/л / ${formData.ammoniaOut} мг/л
+Фосфаты: ${formData.phosphatesIn} мг/л / ${formData.phosphatesOut} мг/л
+ПАВ: ${formData.surfactantsIn} мг/л / ${formData.surfactantsOut} мг/л
+
+Другие требования: ${formData.otherRequirements}
+
+ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ:
+УФ-обеззараживание: ${formData.uvDisinfection}
+Хлорирование: ${formData.chlorination}
+Обезвоживание осадка: ${formData.sludgeDehydration}
+Шкаф управления: ${formData.controlPanel}
+Система аварийной сигнализации: ${formData.alarmSystem}
+Дистанционное управление: ${formData.remoteControl}
+
+КОММЕНТАРИИ:
+${formData.comments}
+
+Дата отправки: ${formData.submissionDate}
+                `.trim();
+
+                // Отправка через EmailJS
+                const response = await emailjs.send(
+                    "tazau",
+                    "template_s1gw5fk",
+                    {
+                        name: formData.fullName,
+                        phone: formData.phone,
+                        email: formData.email,
+                        message: message,
+                        date: formData.submissionDate,
+                        subject: `Новый опросный лист: ${formData.surveyType}`
+                    }
+                );
+
+                if (response.status === 200) {
+                    // Показываем сообщение об успехе
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Сбрасываем форму
+                    this.reset();
+                    document.getElementById('date').value = new Date().toISOString().split('T')[0];
+                    
+                    // Прокручиваем к сообщению
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                }
+            } catch (error) {
+                console.error('Ошибка отправки:', error);
+                alert('Ошибка при отправке формы. Пожалуйста, попробуйте еще раз или позвоните нам.');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

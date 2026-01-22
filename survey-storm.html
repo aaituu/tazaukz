@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Опросный лист для очистных сооружений (ливневые стоки) - ТОО «Экопласт»</title>
+    <link rel="icon" href="logo.png" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #00263d;
+            --secondary-blue: #009dd1;
+            --green: #5a7b46;
+            --dark-green: #468232;
+            --white: #ffffff;
+            --light-green-bg: #f8fff0;
+        }
+        
+        body {
+            background-color: var(--light-green-bg);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 80px;
+        }
+        
+        .survey-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .survey-form {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .form-section {
+            border-left: 4px solid var(--secondary-blue);
+            padding-left: 20px;
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        .form-title {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        
+        .form-label {
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        
+        .submit-btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(70, 130, 50, 0.3);
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(0, 157, 209, 0.25);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .survey-form {
+                padding: 20px;
+            }
+            
+            .form-section {
+                padding: 15px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header style="background-color: white; box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.png" alt="Экопласт" height="50">
+                    <span style="font-weight: 600; color: var(--primary-blue);">ТОО «Экопласт»</span>
+                </a>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='surveys.html'">
+                        <i class="fas fa-list me-1"></i>Все опросы
+                    </button>
+                    <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='index.html'">
+                        <i class="fas fa-home me-1"></i>На главную
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="survey-container">
+        <div class="text-center mb-5 pt-4">
+            <h1 class="display-5 fw-bold" style="color: var(--primary-blue);">Опросный лист для подбора очистных сооружений</h1>
+            <h2 class="h4 text-muted mb-4">для ливневых и нефтесодержащих стоков</h2>
+            <p class="lead">Заполните форму для проектирования очистных сооружений для ливневых и нефтесодержащих стоков</p>
+        </div>
+
+        <div class="survey-form">
+            <form id="stormSurveyForm">
+                <!-- Контактная информация -->
+                <div class="form-section">
+                    <h3 class="form-title">Контактная информация</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label required">ФИО</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Телефон</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">E-Mail</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Дата заполнения</label>
+                            <input type="date" class="form-control" id="date" value="<?php echo date('Y-m-d'); ?>">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Компания</label>
+                            <input type="text" class="form-control" id="company">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Основные вопросы -->
+                <div class="form-section">
+                    <h3 class="form-title">ОСНОВНЫЕ ВОПРОСЫ</h3>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label required">Адрес объекта</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Тип объекта</label>
+                            <select class="form-control" id="objectType" required>
+                                <option value="">Выберите тип</option>
+                                <option value="автопредприятие">Автопредприятие</option>
+                                <option value="АЗС">АЗС</option>
+                                <option value="автомойка">Автомойка</option>
+                                <option value="промышленная площадка">Промышленная площадка</option>
+                                <option value="складская территория">Складская территория</option>
+                                <option value="торговый центр">Торговый центр</option>
+                                <option value="жилой комплекс">Жилой комплекс</option>
+                                <option value="другое">Другое</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Площадь территории, м²</label>
+                            <input type="number" class="form-control" id="area" step="0.1" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label class="form-label">Покрытие территории:</label>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="asphalt">
+                                        <label class="form-check-label" for="asphalt">Асфальтовое покрытие</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="lawn">
+                                        <label class="form-check-label" for="lawn">Газон</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="roof">
+                                        <label class="form-check-label" for="roof">Кровля</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="otherCover">
+                                        <label class="form-check-label" for="otherCover">Другое</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Параметры сточных вод -->
+                <div class="form-section">
+                    <h3 class="form-title">ПАРАМЕТРЫ СТОЧНЫХ ВОД</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label required">Расход сточных вод, л/с</label>
+                            <input type="number" class="form-control" id="flowRate" step="0.1" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Подача сточных вод</label>
+                            <select class="form-control" id="waterSupply">
+                                <option value="">Выберите тип</option>
+                                <option value="самотеком">Самотеком</option>
+                                <option value="насосом">Насосом</option>
+                                <option value="смешанная">Смешанная</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Параметры места установки -->
+                <div class="form-section">
+                    <h3 class="form-title">ПАРАМЕТРЫ МЕСТА УСТАНОВКИ ОЧИСТНЫХ СООРУЖЕНИЙ</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Исполнение очистных сооружений</label>
+                            <select class="form-control" id="constructionType">
+                                <option value="">Выберите исполнение</option>
+                                <option value="наземное">Наземное</option>
+                                <option value="подземное">Подземное</option>
+                                <option value="блочно-модульное">Блочно-модульное</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Глубина заложения лотка подводящего коллектора, мм</label>
+                            <input type="number" class="form-control" id="inletDepth">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Диаметр подводящего коллектора, мм</label>
+                            <input type="number" class="form-control" id="inletDiameter">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Отвод очищенных сточных вод</label>
+                            <select class="form-control" id="outletType">
+                                <option value="">Выберите тип</option>
+                                <option value="в водоем">В водоем</option>
+                                <option value="в городскую канализацию">В городскую канализацию</option>
+                                <option value="в дренаж">В дренаж</option>
+                                <option value="на рельеф">На рельеф</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Точка сброса очищенных сточных вод</label>
+                            <input type="text" class="form-control" id="dischargePoint" placeholder="Например: река, канал, коллектор">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Параметры площадки (размеры, грунты)</label>
+                            <textarea class="form-control" id="siteParams" rows="2" placeholder="Размеры площадки, тип грунта, уровень грунтовых вод"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Параметры сточных вод и нормативные требования -->
+                <div class="form-section">
+                    <h3 class="form-title">ПАРАМЕТРЫ СТОЧНЫХ ВОД И НОРМАТИВНЫЕ ТРЕБОВАНИЯ</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Показатели</th>
+                                    <th>На входе, мг/л</th>
+                                    <th>Требования на выходе, мг/л</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Взвешенные вещества</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="suspendedSolidsIn" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="suspendedSolidsOut" step="0.1"></td>
+                                </tr>
+                                <tr>
+                                    <td>Нефтепродукты</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="oilProductsIn" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="oilProductsOut" step="0.1"></td>
+                                </tr>
+                                <tr>
+                                    <td>БПК полн.</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="bpdIn" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="bpdOut" step="0.1"></td>
+                                </tr>
+                                <tr>
+                                    <td>ХПК</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="codIn" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="codOut" step="0.1"></td>
+                                </tr>
+                                <tr>
+                                    <td>pH</td>
+                                    <td><input type="number" class="form-control form-control-sm" id="phIn" step="0.1"></td>
+                                    <td><input type="number" class="form-control form-control-sm" id="phOut" step="0.1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <label class="form-label">Другие показатели (если известны)</label>
+                        <textarea class="form-control" id="otherIndicators" rows="2" placeholder="Дополнительные показатели качества воды"></textarea>
+                    </div>
+                </div>
+
+                <!-- Дополнительные комментарии -->
+                <div class="form-section">
+                    <h3 class="form-title">ДОПОЛНИТЕЛЬНЫЕ КОММЕНТАРИИ</h3>
+                    <div class="mb-3">
+                        <label class="form-label">Особые требования или комментарии</label>
+                        <textarea class="form-control" id="comments" rows="3" placeholder="Укажите дополнительные требования или комментарии..."></textarea>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" id="agree" required>
+                        <label class="form-check-label required" for="agree">
+                            Я согласен на обработку персональных данных
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <div class="text-center mt-5">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane me-2"></i>Отправить опросный лист
+                    </button>
+                </div>
+            </form>
+            
+            <div id="successMessage" class="alert alert-success mt-4 text-center" style="display: none;">
+                <i class="fas fa-check-circle me-2"></i> 
+                <strong>Ваш опросный лист отправлен!</strong><br>
+                Мы свяжемся с вами в ближайшее время для подготовки коммерческого предложения.
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Инициализация EmailJS
+        (function() {
+            emailjs.init("GuD2XBC894z6ShpZu");
+        })();
+
+        // Устанавливаем текущую дату
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+
+        // Обработка формы
+        document.getElementById('stormSurveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!document.getElementById('agree').checked) {
+                alert('Пожалуйста, дайте согласие на обработку персональных данных');
+                return;
+            }
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Отправка...';
+            submitBtn.disabled = true;
+
+            // Собираем данные формы
+            const formData = {
+                surveyType: 'Опросный лист для подбора очистных сооружений (ливневые стоки)',
+                fullName: document.getElementById('fullName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                date: document.getElementById('date').value,
+                company: document.getElementById('company').value,
+                address: document.getElementById('address').value,
+                objectType: document.getElementById('objectType').value,
+                area: document.getElementById('area').value,
+                asphalt: document.getElementById('asphalt').checked ? 'Да' : 'Нет',
+                lawn: document.getElementById('lawn').checked ? 'Да' : 'Нет',
+                roof: document.getElementById('roof').checked ? 'Да' : 'Нет',
+                otherCover: document.getElementById('otherCover').checked ? 'Да' : 'Нет',
+                flowRate: document.getElementById('flowRate').value,
+                waterSupply: document.getElementById('waterSupply').value,
+                constructionType: document.getElementById('constructionType').value,
+                inletDepth: document.getElementById('inletDepth').value,
+                inletDiameter: document.getElementById('inletDiameter').value,
+                outletType: document.getElementById('outletType').value,
+                dischargePoint: document.getElementById('dischargePoint').value,
+                siteParams: document.getElementById('siteParams').value,
+                suspendedSolidsIn: document.getElementById('suspendedSolidsIn').value,
+                suspendedSolidsOut: document.getElementById('suspendedSolidsOut').value,
+                oilProductsIn: document.getElementById('oilProductsIn').value,
+                oilProductsOut: document.getElementById('oilProductsOut').value,
+                bpdIn: document.getElementById('bpdIn').value,
+                bpdOut: document.getElementById('bpdOut').value,
+                codIn: document.getElementById('codIn').value,
+                codOut: document.getElementById('codOut').value,
+                phIn: document.getElementById('phIn').value,
+                phOut: document.getElementById('phOut').value,
+                otherIndicators: document.getElementById('otherIndicators').value,
+                comments: document.getElementById('comments').value,
+                submissionDate: new Date().toLocaleString('ru-RU')
+            };
+
+            try {
+                // Формируем сообщение
+                const message = `
+Тип опросного листа: ${formData.surveyType}
+
+КОНТАКТНАЯ ИНФОРМАЦИЯ:
+ФИО: ${formData.fullName}
+Телефон: ${formData.phone}
+Email: ${formData.email}
+Дата заполнения: ${formData.date}
+Компания: ${formData.company}
+
+ОСНОВНЫЕ ВОПРОСЫ:
+Адрес объекта: ${formData.address}
+Тип объекта: ${formData.objectType}
+Площадь территории: ${formData.area} м²
+Покрытие территории: 
+  - Асфальтовое: ${formData.asphalt}
+  - Газон: ${formData.lawn}
+  - Кровля: ${formData.roof}
+  - Другое: ${formData.otherCover}
+
+ПАРАМЕТРЫ СТОЧНЫХ ВОД:
+Расход сточных вод: ${formData.flowRate} л/с
+Подача сточных вод: ${formData.waterSupply}
+
+ПАРАМЕТРЫ МЕСТА УСТАНОВКИ:
+Исполнение: ${formData.constructionType}
+Глубина заложения лотка: ${formData.inletDepth} мм
+Диаметр коллектора: ${formData.inletDiameter} мм
+Отвод очищенных вод: ${formData.outletType}
+Точка сброса: ${formData.dischargePoint}
+Параметры площадки: ${formData.siteParams}
+
+ПАРАМЕТРЫ СТОЧНЫХ ВОД:
+На входе / Требования на выходе:
+Взвешенные вещества: ${formData.suspendedSolidsIn} мг/л / ${formData.suspendedSolidsOut} мг/л
+Нефтепродукты: ${formData.oilProductsIn} мг/л / ${formData.oilProductsOut} мг/л
+БПК полн.: ${formData.bpdIn} мг/л / ${formData.bpdOut} мг/л
+ХПК: ${formData.codIn} мг/л / ${formData.codOut} мг/л
+pH: ${formData.phIn} / ${formData.phOut}
+
+Другие показатели: ${formData.otherIndicators}
+
+ДОПОЛНИТЕЛЬНЫЕ КОММЕНТАРИИ:
+${formData.comments}
+
+Дата отправки: ${formData.submissionDate}
+                `.trim();
+
+                // Отправка через EmailJS
+                const response = await emailjs.send(
+                    "tazau",
+                    "template_s1gw5fk",
+                    {
+                        name: formData.fullName,
+                        phone: formData.phone,
+                        email: formData.email,
+                        message: message,
+                        date: formData.submissionDate,
+                        subject: `Новый опросный лист: ${formData.surveyType}`
+                    }
+                );
+
+                if (response.status === 200) {
+                    // Показываем сообщение об успехе
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Сбрасываем форму
+                    this.reset();
+                    document.getElementById('date').value = new Date().toISOString().split('T')[0];
+                    
+                    // Прокручиваем к сообщению
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                }
+            } catch (error) {
+                console.error('Ошибка отправки:', error);
+                alert('Ошибка при отправке формы. Пожалуйста, попробуйте еще раз или позвоните нам.');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

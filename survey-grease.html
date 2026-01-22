@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Опросный лист для подбора жироуловителя - ТОО «Экопласт»</title>
+    <link rel="icon" href="logo.png" type="image/png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <style>
+      :root {
+        --primary-blue: #00263d;
+        --secondary-blue: #009dd1;
+        --green: #5a7b46;
+        --dark-green: #468232;
+        --white: #ffffff;
+        --light-green-bg: #f8fff0;
+      }
+
+      body {
+        background-color: var(--light-green-bg);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding-top: 80px;
+      }
+
+      .survey-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      .survey-form {
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+      }
+
+      .form-section {
+        border-left: 4px solid var(--secondary-blue);
+        padding-left: 20px;
+        margin-bottom: 40px;
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 8px;
+      }
+
+      .form-title {
+        color: var(--primary-blue);
+        border-bottom: 2px solid var(--green);
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        font-size: 1.3rem;
+      }
+
+      .form-label {
+        color: var(--primary-blue);
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      .required::after {
+        content: " *";
+        color: red;
+      }
+
+      .submit-btn {
+        background: var(--green);
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .submit-btn:hover {
+        background: var(--dark-green);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(70, 130, 50, 0.3);
+      }
+
+      .form-control:focus {
+        border-color: var(--secondary-blue);
+        box-shadow: 0 0 0 0.2rem rgba(0, 157, 209, 0.25);
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 768px) {
+        .survey-form {
+          padding: 20px;
+        }
+
+        .form-section {
+          padding: 15px;
+        }
+
+        .nav-buttons {
+          flex-direction: column;
+        }
+
+        .nav-buttons button {
+          width: 100%;
+        }
+      }
+
+      .capacity-info {
+        background: #e8ffda;
+        border: 1px solid var(--green);
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      .capacity-info h6 {
+        color: var(--primary-blue);
+        font-weight: 600;
+      }
+
+      .installation-info {
+        background: #e8f4ff;
+        border: 1px solid var(--secondary-blue);
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header
+      style="
+        background-color: white;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      "
+    >
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <img src="logo.png" alt="Экопласт" height="50" />
+            <span style="font-weight: 600; color: var(--primary-blue)"
+              >ТОО «Экопласт»</span
+            >
+          </a>
+          <div class="nav-buttons">
+            <button
+              class="btn btn-outline-primary btn-sm"
+              onclick="window.location.href = 'surveys.html'"
+            >
+              <i class="fas fa-list me-1"></i>Все опросы
+            </button>
+            <button
+              class="btn btn-outline-primary btn-sm"
+              onclick="window.location.href = 'index.html'"
+            >
+              <i class="fas fa-home me-1"></i>На главную
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="survey-container">
+      <div class="text-center mb-5 pt-4">
+        <h1 class="display-5 fw-bold" style="color: var(--primary-blue)">
+          Опросный лист для подбора жироуловителя
+        </h1>
+        <p class="lead">
+          Заполните форму для точного подбора жироуловителя под ваши требования
+        </p>
+      </div>
+
+      <div class="capacity-info">
+        <h6>
+          <i class="fas fa-info-circle me-2"></i>Как определить
+          производительность:
+        </h6>
+        <p class="mb-2 small">
+          • Для кафе/ресторана: 0.1 л/сек на одно посадочное место
+        </p>
+        <p class="mb-2 small">
+          • Для столовой: 0.05 л/сек на одно посадочное место
+        </p>
+        <p class="mb-0 small">
+          • Для кухни жилого дома: 0.7 л/сек на одну раковину
+        </p>
+      </div>
+
+      <div class="survey-form">
+        <form id="greaseSurveyForm">
+          <!-- Контактная информация -->
+          <div class="form-section">
+            <h3 class="form-title">Контактная информация</h3>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label required">Контактное лицо</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="contactPerson"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label required">Телефон</label>
+                <input type="tel" class="form-control" id="phone" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label required">E-Mail</label>
+                <input type="email" class="form-control" id="email" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Основные параметры -->
+          <div class="form-section">
+            <h3 class="form-title">ОСНОВНЫЕ ПАРАМЕТРЫ</h3>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label required"
+                  >Производительность, м³/час</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="capacity"
+                  required
+                  step="0.1"
+                  min="0.1"
+                />
+                <small class="text-muted"
+                  >Объем стоков, проходящих через жироуловитель в час</small
+                >
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Залповый сброс, л/сек</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="peakFlow"
+                  step="0.1"
+                  min="0"
+                />
+                <small class="text-muted"
+                  >Максимальный одновременный сброс стоков</small
+                >
+              </div>
+              <div class="col-md-6">
+                <label class="form-label required">Тип предприятия</label>
+                <select class="form-control" id="enterpriseType" required>
+                  <option value="">Выберите тип</option>
+                  <option value="ресторан">Ресторан</option>
+                  <option value="кафе">Кафе</option>
+                  <option value="столовая">Столовая</option>
+                  <option value="фаст-фуд">Фаст-фуд</option>
+                  <option value="гостиница">Гостиница</option>
+                  <option value="больница">Больница</option>
+                  <option value="школа/детский сад">Школа/Детский сад</option>
+                  <option value="промышленная кухня">Промышленная кухня</option>
+                  <option value="мясной цех">Мясной цех</option>
+                  <option value="кондитерский цех">Кондитерский цех</option>
+                  <option value="частный дом">Частный дом</option>
+                  <option value="другое">Другое</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label required"
+                  >График работы предприятия</label
+                >
+                <div class="input-group">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="workingHours"
+                    required
+                    min="1"
+                    max="24"
+                    value="12"
+                  />
+                  <span class="input-group-text">часов в сутки</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Параметры установки -->
+          <div class="form-section">
+            <h3 class="form-title">ПАРАМЕТРЫ УСТАНОВКИ</h3>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label required"
+                  >Установка жироуловителя</label
+                >
+                <select class="form-control" id="installationType" required>
+                  <option value="">Выберите тип установки</option>
+                  <option value="под мойку">Под мойку</option>
+                  <option value="в пол">В пол (подпольный)</option>
+                  <option value="наружная">Наружная установка</option>
+                  <option value="в техническом помещении">
+                    В техническом помещении
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label required"
+                  >Количество кранов/раковин</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="sinksCount"
+                  required
+                  min="1"
+                  value="1"
+                />
+              </div>
+            </div>
+
+            <!-- Габариты мойки -->
+            <div class="row mt-3">
+              <div class="col-12">
+                <h6 class="mb-3" style="color: var(--primary-blue)">
+                  Габариты мойки (если установка под мойку)
+                </h6>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Ширина мойки, см</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="sinkWidth"
+                  step="0.1"
+                />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Длина мойки, см</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="sinkLength"
+                  step="0.1"
+                />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Высота мойки, см</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="sinkHeight"
+                  step="0.1"
+                />
+              </div>
+            </div>
+
+            <!-- Пространство под мойкой -->
+            <div class="row mt-3" id="underSinkSpace" style="display: none">
+              <div class="col-12">
+                <h6 class="mb-3" style="color: var(--primary-blue)">
+                  Размеры пространства под мойкой
+                </h6>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label required">Ширина, см</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="spaceWidth"
+                  step="0.1"
+                />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label required">Длина, см</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="spaceLength"
+                  step="0.1"
+                />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label required">Высота, см</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="spaceHeight"
+                  step="0.1"
+                />
+              </div>
+            </div>
+
+            <script>
+              document
+                .getElementById("installationType")
+                .addEventListener("change", function () {
+                  const underSinkSpace =
+                    document.getElementById("underSinkSpace");
+                  if (this.value === "под мойку") {
+                    underSinkSpace.style.display = "block";
+                    document.getElementById("spaceWidth").required = true;
+                    document.getElementById("spaceLength").required = true;
+                    document.getElementById("spaceHeight").required = true;
+                  } else {
+                    underSinkSpace.style.display = "none";
+                    document.getElementById("spaceWidth").required = false;
+                    document.getElementById("spaceLength").required = false;
+                    document.getElementById("spaceHeight").required = false;
+                  }
+                });
+            </script>
+          </div>
+
+          <!-- Информация об установке -->
+          <div class="installation-info">
+            <h6><i class="fas fa-tools me-2"></i>Требования к установке:</h6>
+            <p class="mb-2 small">
+              • Для подпольной установки: минимальная глубина 1.2 м
+            </p>
+            <p class="mb-2 small">
+              • Для установки в помещении: наличие вентиляции и свободного
+              доступа
+            </p>
+            <p class="mb-0 small">• Температура в помещении: не ниже +5°C</p>
+          </div>
+
+          <!-- Дополнительные параметры -->
+          <div class="form-section">
+            <h3 class="form-title">ДОПОЛНИТЕЛЬНЫЕ ПАРАМЕТРЫ</h3>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Материал жироуловителя</label>
+                <select class="form-control" id="material">
+                  <option value="">Выберите материал</option>
+                  <option value="полипропилен">Полипропилен</option>
+                  <option value="полиэтилен">Полиэтилен</option>
+                  <option value="стеклопластик">Стеклопластик</option>
+                  <option value="нержавеющая сталь">Нержавеющая сталь</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Тип подключения</label>
+                <select class="form-control" id="connectionType">
+                  <option value="">Выберите тип</option>
+                  <option value="фланцевое">Фланцевое</option>
+                  <option value="раструбное">Раструбное</option>
+                  <option value="муфтовое">Муфтовое</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Диаметр входного патрубка, мм</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="inletDiameter"
+                  min="50"
+                  value="110"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Диаметр выходного патрубка, мм</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="outletDiameter"
+                  min="50"
+                  value="110"
+                />
+              </div>
+            </div>
+
+            <!-- Дополнительное оборудование -->
+            <div class="row mt-3">
+              <div class="col-12">
+                <label class="form-label mb-3"
+                  >Дополнительное оборудование</label
+                >
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="heatingElement"
+                      />
+                      <label class="form-check-label" for="heatingElement"
+                        >Нагревательный элемент</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="greaseCollector"
+                      />
+                      <label class="form-check-label" for="greaseCollector"
+                        >Съемный жиросборник</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="levelSensor"
+                      />
+                      <label class="form-check-label" for="levelSensor"
+                        >Датчик уровня жира</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="alarmSystem"
+                      />
+                      <label class="form-check-label" for="alarmSystem"
+                        >Система аварийной сигнализации</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="bacterialTreatment"
+                      />
+                      <label class="form-check-label" for="bacterialTreatment"
+                        >Бактериальная обработка</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="automaticCleaning"
+                      />
+                      <label class="form-check-label" for="automaticCleaning"
+                        >Система автоматической очистки</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Результаты анализа воды -->
+          <div class="form-section">
+            <h3 class="form-title">РЕЗУЛЬТАТЫ АНАЛИЗА ВОДЫ (если есть)</h3>
+            <div class="mb-3">
+              <label class="form-label">Концентрация жиров и масел, мг/л</label>
+              <input
+                type="number"
+                class="form-control"
+                id="fatConcentration"
+                step="0.1"
+                placeholder="Например: 150"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label"
+                >Требуемая концентрация на выходе, мг/л</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="requiredConcentration"
+                step="0.1"
+                placeholder="Например: 10"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label"
+                >Другие показатели (если известны)</label
+              >
+              <textarea
+                class="form-control"
+                id="otherIndicators"
+                rows="2"
+                placeholder="pH, температура, наличие ПАВ и др."
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Загрузить файл с анализом воды</label>
+              <input
+                type="file"
+                class="form-control"
+                id="waterAnalysisFile"
+                accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+              />
+              <small class="text-muted"
+                >Можно прикрепить файл с результатами анализа (PDF, JPG,
+                DOC)</small
+              >
+            </div>
+          </div>
+
+          <!-- Дополнительные комментарии -->
+          <div class="form-section">
+            <h3 class="form-title">ДОПОЛНИТЕЛЬНЫЕ КОММЕНТАРИИ</h3>
+            <div class="mb-3">
+              <label class="form-label"
+                >Особые требования или комментарии</label
+              >
+              <textarea
+                class="form-control"
+                id="comments"
+                rows="4"
+                placeholder="Укажите дополнительные требования, особенности установки, пожелания..."
+              ></textarea>
+            </div>
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="agree"
+                required
+              />
+              <label class="form-check-label required" for="agree">
+                Я согласен на обработку персональных данных
+              </label>
+            </div>
+          </div>
+
+          <!-- Кнопка отправки -->
+          <div class="text-center mt-5">
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-paper-plane me-2"></i>Отправить опросный лист
+            </button>
+          </div>
+        </form>
+
+        <div
+          id="successMessage"
+          class="alert alert-success mt-4 text-center"
+          style="display: none"
+        >
+          <i class="fas fa-check-circle me-2"></i>
+          <strong>Ваш опросный лист отправлен!</strong><br />
+          Мы свяжемся с вами в ближайшее время для подготовки коммерческого
+          предложения.
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Инициализация EmailJS
+      (function () {
+        emailjs.init("GuD2XBC894z6ShpZu");
+      })();
+
+      // Автоматический расчет производительности по типу предприятия
+      document
+        .getElementById("enterpriseType")
+        .addEventListener("change", function () {
+          const type = this.value;
+          let capacity = 0.1;
+          let sinksCount = 1;
+
+          switch (type) {
+            case "ресторан":
+              capacity = 0.15;
+              sinksCount = 3;
+              break;
+            case "кафе":
+              capacity = 0.1;
+              sinksCount = 2;
+              break;
+            case "столовая":
+              capacity = 0.08;
+              sinksCount = 2;
+              break;
+            case "фаст-фуд":
+              capacity = 0.05;
+              sinksCount = 1;
+              break;
+            case "гостиница":
+              capacity = 0.12;
+              sinksCount = 2;
+              break;
+            case "частный дом":
+              capacity = 0.02;
+              sinksCount = 1;
+              break;
+            case "промышленная кухня":
+              capacity = 0.3;
+              sinksCount = 4;
+              break;
+          }
+
+          if (capacity > 0) {
+            document.getElementById("capacity").value = capacity.toFixed(2);
+          }
+          if (sinksCount > 0) {
+            document.getElementById("sinksCount").value = sinksCount;
+          }
+        });
+
+      // Обработка формы
+      document
+        .getElementById("greaseSurveyForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          if (!document.getElementById("agree").checked) {
+            alert(
+              "Пожалуйста, дайте согласие на обработку персональных данных",
+            );
+            return;
+          }
+
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin me-2"></i>Отправка...';
+          submitBtn.disabled = true;
+
+          // Собираем данные формы
+          const formData = {
+            surveyType: "Опросный лист для подбора жироуловителя",
+            contactPerson: document.getElementById("contactPerson").value,
+            phone: document.getElementById("phone").value,
+            email: document.getElementById("email").value,
+            capacity: document.getElementById("capacity").value,
+            peakFlow: document.getElementById("peakFlow").value,
+            enterpriseType: document.getElementById("enterpriseType").value,
+            workingHours: document.getElementById("workingHours").value,
+            installationType: document.getElementById("installationType").value,
+            sinksCount: document.getElementById("sinksCount").value,
+            sinkWidth: document.getElementById("sinkWidth").value,
+            sinkLength: document.getElementById("sinkLength").value,
+            sinkHeight: document.getElementById("sinkHeight").value,
+            spaceWidth: document.getElementById("spaceWidth").value,
+            spaceLength: document.getElementById("spaceLength").value,
+            spaceHeight: document.getElementById("spaceHeight").value,
+            material: document.getElementById("material").value,
+            connectionType: document.getElementById("connectionType").value,
+            inletDiameter: document.getElementById("inletDiameter").value,
+            outletDiameter: document.getElementById("outletDiameter").value,
+            heatingElement: document.getElementById("heatingElement").checked
+              ? "Да"
+              : "Нет",
+            greaseCollector: document.getElementById("greaseCollector").checked
+              ? "Да"
+              : "Нет",
+            levelSensor: document.getElementById("levelSensor").checked
+              ? "Да"
+              : "Нет",
+            alarmSystem: document.getElementById("alarmSystem").checked
+              ? "Да"
+              : "Нет",
+            bacterialTreatment: document.getElementById("bacterialTreatment")
+              .checked
+              ? "Да"
+              : "Нет",
+            automaticCleaning: document.getElementById("automaticCleaning")
+              .checked
+              ? "Да"
+              : "Нет",
+            fatConcentration: document.getElementById("fatConcentration").value,
+            requiredConcentration: document.getElementById(
+              "requiredConcentration",
+            ).value,
+            otherIndicators: document.getElementById("otherIndicators").value,
+            comments: document.getElementById("comments").value,
+            submissionDate: new Date().toLocaleString("ru-RU"),
+          };
+
+          try {
+            // Формируем сообщение
+            const message = `
+Тип опросного листа: ${formData.surveyType}
+
+КОНТАКТНАЯ ИНФОРМАЦИЯ:
+Контактное лицо: ${formData.contactPerson}
+Телефон: ${formData.phone}
+Email: ${formData.email}
+
+ОСНОВНЫЕ ПАРАМЕТРЫ:
+Производительность: ${formData.capacity} м³/час
+Залповый сброс: ${formData.peakFlow} л/сек
+Тип предприятия: ${formData.enterpriseType}
+График работы: ${formData.workingHours} часов в сутки
+
+ПАРАМЕТРЫ УСТАНОВКИ:
+Тип установки: ${formData.installationType}
+Количество кранов/раковин: ${formData.sinksCount} шт.
+
+ГАБАРИТЫ МОЙКИ:
+Ширина: ${formData.sinkWidth} см
+Длина: ${formData.sinkLength} см
+Высота: ${formData.sinkHeight} см
+
+ПРОСТРАНСТВО ПОД МОЙКОЙ:
+Ширина: ${formData.spaceWidth} см
+Длина: ${formData.spaceLength} см
+Высота: ${formData.spaceHeight} см
+
+ДОПОЛНИТЕЛЬНЫЕ ПАРАМЕТРЫ:
+Материал: ${formData.material}
+Тип подключения: ${formData.connectionType}
+Диаметр входного патрубка: ${formData.inletDiameter} мм
+Диаметр выходного патрубка: ${formData.outletDiameter} мм
+
+ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ:
+Нагревательный элемент: ${formData.heatingElement}
+Съемный жиросборник: ${formData.greaseCollector}
+Датчик уровня жира: ${formData.levelSensor}
+Система аварийной сигнализации: ${formData.alarmSystem}
+Бактериальная обработка: ${formData.bacterialTreatment}
+Автоматическая очистка: ${formData.automaticCleaning}
+
+АНАЛИЗ ВОДЫ:
+Концентрация жиров: ${formData.fatConcentration} мг/л
+Требуемая концентрация: ${formData.requiredConcentration} мг/л
+Другие показатели: ${formData.otherIndicators}
+
+КОММЕНТАРИИ:
+${formData.comments}
+
+Дата отправки: ${formData.submissionDate}
+                `.trim();
+
+            // Отправка через EmailJS
+            const response = await emailjs.send("tazau", "template_s1gw5fk", {
+              name: formData.contactPerson,
+              phone: formData.phone,
+              email: formData.email,
+              message: message,
+              date: formData.submissionDate,
+              subject: `Новый опросный лист: ${formData.surveyType}`,
+            });
+
+            if (response.status === 200) {
+              // Показываем сообщение об успехе
+              document.getElementById("successMessage").style.display = "block";
+
+              // Сбрасываем форму
+              this.reset();
+
+              // Прокручиваем к сообщению
+              document
+                .getElementById("successMessage")
+                .scrollIntoView({ behavior: "smooth" });
+            }
+          } catch (error) {
+            console.error("Ошибка отправки:", error);
+            alert(
+              "Ошибка при отправке формы. Пожалуйста, попробуйте еще раз или позвоните нам.",
+            );
+          } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          }
+        });
+    </script>
+  </body>
+</html>

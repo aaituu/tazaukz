@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Опросный лист для шкафа управления насосами - ТОО «Экопласт»</title>
+    <link rel="icon" href="logo.png" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #00263d;
+            --secondary-blue: #009dd1;
+            --green: #5a7b46;
+            --dark-green: #468232;
+            --white: #ffffff;
+            --light-green-bg: #f8fff0;
+        }
+        
+        body {
+            background-color: var(--light-green-bg);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 80px;
+        }
+        
+        .survey-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .survey-form {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .form-section {
+            border-left: 4px solid var(--secondary-blue);
+            padding-left: 20px;
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        .form-title {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        
+        .form-label {
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        
+        .submit-btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(70, 130, 50, 0.3);
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(0, 157, 209, 0.25);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .survey-form {
+                padding: 20px;
+            }
+            
+            .form-section {
+                padding: 15px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-buttons button {
+                width: 100%;
+            }
+        }
+        
+        .voltage-info {
+            background: #e8ffda;
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .voltage-info h6 {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header style="background-color: white; box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.png" alt="Экопласт" height="50">
+                    <span style="font-weight: 600; color: var(--primary-blue);">ТОО «Экопласт»</span>
+                </a>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='surveys.html'">
+                        <i class="fas fa-list me-1"></i>Все опросы
+                    </button>
+                    <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='index.html'">
+                        <i class="fas fa-home me-1"></i>На главную
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="survey-container">
+        <div class="text-center mb-5 pt-4">
+            <h1 class="display-5 fw-bold" style="color: var(--primary-blue);">Опросный лист для подготовки коммерческого предложения</h1>
+            <h2 class="h4 text-muted mb-4">на шкаф управления насосами Alta Control KNS</h2>
+            <p class="lead">Заполните форму для подготовки коммерческого предложения на шкаф управления насосами</p>
+        </div>
+
+        <div class="survey-form">
+            <form id="controlSurveyForm">
+                <!-- Информация о напряжении -->
+                <div class="voltage-info">
+                    <h6><i class="fas fa-bolt me-2"></i>Важная информация о напряжении:</h6>
+                    <p class="mb-2 small">• Однофазные насосы: 220 В, 50 Гц</p>
+                    <p class="mb-2 small">• Трехфазные насосы: 380 В, 50 Гц</p>
+                    <p class="mb-0 small">• Укажите точное напряжение питания на объекте</p>
+                </div>
+
+                <!-- Контактная информация -->
+                <div class="form-section">
+                    <h3 class="form-title">Контактная информация</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label required">Заказчик</label>
+                            <input type="text" class="form-control" id="customer" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Контактное лицо</label>
+                            <input type="text" class="form-control" id="contactPerson" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Телефон</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">E-Mail</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Дата заполнения</label>
+                            <input type="date" class="form-control" id="date" required value="<?php echo date('Y-m-d'); ?>">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Общая информация -->
+                <div class="form-section">
+                    <h3 class="form-title">ОБЩАЯ ИНФОРМАЦИЯ</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label required">Марка насосов</label>
+                            <input type="text" class="form-control" id="pumpBrand" required placeholder="Например: Grundfos, Wilo, Pedrollo">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Количество насосов, шт.</label>
+                            <input type="number" class="form-control" id="pumpsCount" required min="1" value="2">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Напряжение питания, В</label>
+                            <select class="form-control" id="voltage" required>
+                                <option value="">Выберите напряжение</option>
+                                <option value="220">220 В (однофазное)</option>
+                                <option value="380">380 В (трехфазное)</option>
+                                <option value="другое">Другое</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Максимальная мощность одного насоса, кВт</label>
+                            <input type="number" class="form-control" id="pumpPower" step="0.1" placeholder="Например: 2.2">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Наличие датчика перегрева в насосе</label>
+                            <select class="form-control" id="overheatSensor">
+                                <option value="">Выберите</option>
+                                <option value="да">Да</option>
+                                <option value="нет">Нет</option>
+                                <option value="неизвестно">Неизвестно</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Расположение шкафа</label>
+                            <select class="form-control" id="cabinetLocation" required>
+                                <option value="">Выберите</option>
+                                <option value="в помещении">В помещении</option>
+                                <option value="на улице">На улице</option>
+                                <option value="в павильоне">В павильоне</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Условия эксплуатации -->
+                <div class="form-section">
+                    <h3 class="form-title">УСЛОВИЯ ЭКСПЛУАТАЦИИ</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label required">Минимальная температура эксплуатации, °C</label>
+                            <input type="number" class="form-control" id="minTemperature" required value="0">
+                            <small class="text-muted">Минимальная температура окружающей среды</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Максимальная температура эксплуатации, °C</label>
+                            <input type="number" class="form-control" id="maxTemperature" required value="40">
+                            <small class="text-muted">Максимальная температура окружающей среды</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Удалённость от КНС, м</label>
+                            <input type="number" class="form-control" id="distanceFromKNS" required value="10" step="0.1">
+                            <small class="text-muted">Расстояние от шкафа до насосной станции</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Степень защиты IP</label>
+                            <select class="form-control" id="ipRating">
+                                <option value="">Выберите степень защиты</option>
+                                <option value="IP54">IP54 (от брызг воды)</option>
+                                <option value="IP55">IP55 (от струй воды)</option>
+                                <option value="IP65">IP65 (пыленепроницаемый, от струй воды)</option>
+                                <option value="IP66">IP66 (пыленепроницаемый, от сильных струй воды)</option>
+                                <option value="IP67">IP67 (пыленепроницаемый, от временного погружения)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Комплектация -->
+                <div class="form-section">
+                    <h3 class="form-title">КОМПЛЕКТАЦИЯ</h3>
+                    <p class="text-muted mb-3">Отметьте необходимые опции:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="smsSystem">
+                                <label class="form-check-label" for="smsSystem">
+                                    <strong>Система SMS оповещения и управления</strong>
+                                    <small class="d-block text-muted">Отправка SMS при авариях, удаленное управление</small>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="avr">
+                                <label class="form-check-label" for="avr">
+                                    <strong>Автоматическое включение резерва питания (АВР)</strong>
+                                    <small class="d-block text-muted">Автоматическое переключение на резервный ввод</small>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="currentIndicator">
+                                <label class="form-check-label" for="currentIndicator">
+                                    <strong>Индикация тока</strong>
+                                    <small class="d-block text-muted">Цифровая индикация тока на лицевой панели</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="voltageIndicator">
+                                <label class="form-check-label" for="voltageIndicator">
+                                    <strong>Индикация напряжения</strong>
+                                    <small class="d-block text-muted">Цифровая индикация напряжения на лицевой панели</small>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="softStart">
+                                <label class="form-check-label" for="softStart">
+                                    <strong>Плавный пуск (софт-стартер)</strong>
+                                    <small class="d-block text-muted">Плавный запуск насосов для уменьшения пусковых токов</small>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="frequencyConverter">
+                                <label class="form-check-label" for="frequencyConverter">
+                                    <strong>Преобразователь частоты</strong>
+                                    <small class="d-block text-muted">Плавное регулирование скорости насосов</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Дополнительные опции -->
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label class="form-label">Дополнительные опции</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="modem">
+                                        <label class="form-check-label" for="modem">GSM-модем</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="remoteMonitoring">
+                                        <label class="form-check-label" for="remoteMonitoring">Удаленный мониторинг</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="emergencyLight">
+                                        <label class="form-check-label" for="emergencyLight">Аварийное освещение</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="heating">
+                                        <label class="form-check-label" for="heating">Обогрев шкафа</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="ventilation">
+                                        <label class="form-check-label" for="ventilation">Вентиляция</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="doorSwitch">
+                                        <label class="form-check-label" for="doorSwitch">Датчик открытия двери</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Текст SMS сообщения -->
+                    <div class="mt-3" id="smsTextSection" style="display: none;">
+                        <label class="form-label">Текст SMS сообщения (если требуется изменение)</label>
+                        <textarea class="form-control" id="smsText" rows="2" placeholder="Введите текст SMS сообщения для оповещений..."></textarea>
+                        <small class="text-muted">По умолчанию: "Авария КНС [адрес]. Требуется обслуживание."</small>
+                    </div>
+                    
+                    <script>
+                        document.getElementById('smsSystem').addEventListener('change', function() {
+                            document.getElementById('smsTextSection').style.display = this.checked ? 'block' : 'none';
+                        });
+                    </script>
+                </div>
+
+                <!-- Схема управления -->
+                <div class="form-section">
+                    <h3 class="form-title">СХЕМА УПРАВЛЕНИЯ</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Режим работы насосов</label>
+                            <select class="form-control" id="operationMode">
+                                <option value="">Выберите режим</option>
+                                <option value="основной-резервный">Основной-резервный</option>
+                                <option value="попеременный">Попеременный</option>
+                                <option value="параллельный">Параллельный</option>
+                                <option value="частотное регулирование">Частотное регулирование</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Тип управления</label>
+                            <select class="form-control" id="controlType">
+                                <option value="">Выберите тип</option>
+                                <option value="автоматическое">Автоматическое</option>
+                                <option value="ручное">Ручное</option>
+                                <option value="дистанционное">Дистанционное</option>
+                                <option value="комбинированное">Комбинированное</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Тип датчиков уровня</label>
+                            <select class="form-control" id="levelSensors">
+                                <option value="">Выберите тип</option>
+                                <option value="поплавковые">Поплавковые</option>
+                                <option value="электродные">Электродные</option>
+                                <option value="ультразвуковые">Ультразвуковые</option>
+                                <option value="радарные">Радарные</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Количество датчиков уровня</label>
+                            <input type="number" class="form-control" id="levelSensorsCount" min="2" value="4">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Дополнительные требования -->
+                <div class="form-section">
+                    <h3 class="form-title">ДОПОЛНИТЕЛЬНЫЕ ТРЕБОВАНИЯ</h3>
+                    <div class="mb-3">
+                        <label class="form-label">Особые требования к шкафу управления</label>
+                        <textarea class="form-control" id="specialRequirements" rows="3" placeholder="Укажите особые требования, пожелания, необходимость сертификации..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Комментарии</label>
+                        <textarea class="form-control" id="comments" rows="3" placeholder="Дополнительные комментарии или информация..."></textarea>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="agree" required>
+                        <label class="form-check-label required" for="agree">
+                            Я согласен на обработку персональных данных
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <div class="text-center mt-5">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane me-2"></i>Отправить опросный лист
+                    </button>
+                </div>
+            </form>
+            
+            <div id="successMessage" class="alert alert-success mt-4 text-center" style="display: none;">
+                <i class="fas fa-check-circle me-2"></i> 
+                <strong>Ваш опросный лист отправлен!</strong><br>
+                Мы свяжемся с вами в ближайшее время для подготовки коммерческого предложения.
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Инициализация EmailJS
+        (function() {
+            emailjs.init("GuD2XBC894z6ShpZu");
+        })();
+
+        // Устанавливаем текущую дату
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+
+        // Обработка формы
+        document.getElementById('controlSurveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!document.getElementById('agree').checked) {
+                alert('Пожалуйста, дайте согласие на обработку персональных данных');
+                return;
+            }
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Отправка...';
+            submitBtn.disabled = true;
+
+            // Собираем данные формы
+            const formData = {
+                surveyType: 'Опросный лист для шкафа управления насосами',
+                customer: document.getElementById('customer').value,
+                contactPerson: document.getElementById('contactPerson').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                date: document.getElementById('date').value,
+                pumpBrand: document.getElementById('pumpBrand').value,
+                pumpsCount: document.getElementById('pumpsCount').value,
+                voltage: document.getElementById('voltage').value,
+                pumpPower: document.getElementById('pumpPower').value,
+                overheatSensor: document.getElementById('overheatSensor').value,
+                cabinetLocation: document.getElementById('cabinetLocation').value,
+                minTemperature: document.getElementById('minTemperature').value,
+                maxTemperature: document.getElementById('maxTemperature').value,
+                distanceFromKNS: document.getElementById('distanceFromKNS').value,
+                ipRating: document.getElementById('ipRating').value,
+                smsSystem: document.getElementById('smsSystem').checked ? 'Да' : 'Нет',
+                avr: document.getElementById('avr').checked ? 'Да' : 'Нет',
+                currentIndicator: document.getElementById('currentIndicator').checked ? 'Да' : 'Нет',
+                voltageIndicator: document.getElementById('voltageIndicator').checked ? 'Да' : 'Нет',
+                softStart: document.getElementById('softStart').checked ? 'Да' : 'Нет',
+                frequencyConverter: document.getElementById('frequencyConverter').checked ? 'Да' : 'Нет',
+                modem: document.getElementById('modem').checked ? 'Да' : 'Нет',
+                remoteMonitoring: document.getElementById('remoteMonitoring').checked ? 'Да' : 'Нет',
+                emergencyLight: document.getElementById('emergencyLight').checked ? 'Да' : 'Нет',
+                heating: document.getElementById('heating').checked ? 'Да' : 'Нет',
+                ventilation: document.getElementById('ventilation').checked ? 'Да' : 'Нет',
+                doorSwitch: document.getElementById('doorSwitch').checked ? 'Да' : 'Нет',
+                smsText: document.getElementById('smsText').value,
+                operationMode: document.getElementById('operationMode').value,
+                controlType: document.getElementById('controlType').value,
+                levelSensors: document.getElementById('levelSensors').value,
+                levelSensorsCount: document.getElementById('levelSensorsCount').value,
+                specialRequirements: document.getElementById('specialRequirements').value,
+                comments: document.getElementById('comments').value,
+                submissionDate: new Date().toLocaleString('ru-RU')
+            };
+
+            try {
+                // Формируем сообщение
+                const message = `
+Тип опросного листа: ${formData.surveyType}
+
+КОНТАКТНАЯ ИНФОРМАЦИЯ:
+Заказчик: ${formData.customer}
+Контактное лицо: ${formData.contactPerson}
+Телефон: ${formData.phone}
+Email: ${formData.email}
+Дата заполнения: ${formData.date}
+
+ОБЩАЯ ИНФОРМАЦИЯ:
+Марка насосов: ${formData.pumpBrand}
+Количество насосов: ${formData.pumpsCount} шт.
+Напряжение питания: ${formData.voltage} В
+Мощность насоса: ${formData.pumpPower} кВт
+Датчик перегрева: ${formData.overheatSensor}
+Расположение шкафа: ${formData.cabinetLocation}
+
+УСЛОВИЯ ЭКСПЛУАТАЦИИ:
+Температурный диапазон: от ${formData.minTemperature}°C до ${formData.maxTemperature}°C
+Удаленность от КНС: ${formData.distanceFromKNS} м
+Степень защиты: ${formData.ipRating}
+
+КОМПЛЕКТАЦИЯ:
+SMS оповещение: ${formData.smsSystem}
+Текст SMS: ${formData.smsText}
+АВР: ${formData.avr}
+Индикация тока: ${formData.currentIndicator}
+Индикация напряжения: ${formData.voltageIndicator}
+Плавный пуск: ${formData.softStart}
+Преобразователь частоты: ${formData.frequencyConverter}
+GSM-модем: ${formData.modem}
+Удаленный мониторинг: ${formData.remoteMonitoring}
+Аварийное освещение: ${formData.emergencyLight}
+Обогрев шкафа: ${formData.heating}
+Вентиляция: ${formData.ventilation}
+Датчик открытия двери: ${formData.doorSwitch}
+
+СХЕМА УПРАВЛЕНИЯ:
+Режим работы: ${formData.operationMode}
+Тип управления: ${formData.controlType}
+Датчики уровня: ${formData.levelSensors}
+Количество датчиков: ${formData.levelSensorsCount} шт.
+
+ДОПОЛНИТЕЛЬНЫЕ ТРЕБОВАНИЯ:
+${formData.specialRequirements}
+
+КОММЕНТАРИИ:
+${formData.comments}
+
+Дата отправки: ${formData.submissionDate}
+                `.trim();
+
+                // Отправка через EmailJS
+                const response = await emailjs.send(
+                    "tazau",
+                    "template_s1gw5fk",
+                    {
+                        name: formData.contactPerson,
+                        phone: formData.phone,
+                        email: formData.email,
+                        message: message,
+                        date: formData.submissionDate,
+                        subject: `Новый опросный лист: ${formData.surveyType}`
+                    }
+                );
+
+                if (response.status === 200) {
+                    // Показываем сообщение об успехе
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Сбрасываем форму
+                    this.reset();
+                    document.getElementById('date').value = new Date().toISOString().split('T')[0];
+                    
+                    // Прокручиваем к сообщению
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                }
+            } catch (error) {
+                console.error('Ошибка отправки:', error);
+                alert('Ошибка при отправке формы. Пожалуйста, попробуйте еще раз или позвоните нам.');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

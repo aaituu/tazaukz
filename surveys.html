@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Опросные листы - ТОО «Экопласт»</title>
+    <link rel="icon" href="logo.png" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-blue: #00263d;
+            --secondary-blue: #009dd1;
+            --green: #5a7b46;
+            --dark-green: #468232;
+            --white: #ffffff;
+            --light-green-bg: #f8fff0;
+        }
+        
+        body {
+            background-color: var(--light-green-bg);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 80px;
+        }
+        
+        .survey-header {
+            background: linear-gradient(rgba(1, 55, 125, 0.8), rgba(0, 157, 209, 0.7));
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 50px;
+        }
+        
+        .survey-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            margin-bottom: 30px;
+            border: 2px solid transparent;
+        }
+        
+        .survey-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--secondary-blue);
+        }
+        
+        .survey-icon {
+            background: var(--primary-blue);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+        
+        .survey-content {
+            padding: 30px;
+        }
+        
+        .survey-btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .survey-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+        }
+        
+        .back-btn {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header style="background-color: white; box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.png" alt="Экопласт" height="50">
+                    <span style="font-weight: 600; color: var(--primary-blue);">ТОО «Экопласт»</span>
+                </a>
+                <button class="btn btn-outline-primary" onclick="window.location.href='index.html'">
+                    <i class="fas fa-arrow-left me-2"></i>На главную
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <section class="survey-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Опросные листы</h1>
+            <p class="lead">Заполните опросный лист для точного подбора оборудования. Наши специалисты подготовят для вас коммерческое предложение.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="row g-4">
+            <!-- КНС -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                <div class="survey-card">
+                    <div class="survey-icon">
+                        <i class="fas fa-pump"></i>
+                    </div>
+                    <div class="survey-content">
+                        <h3 class="h4 mb-3" style="color: var(--primary-blue);">Опросный лист для подбора КНС</h3>
+                        <p class="text-muted mb-4">Для точного подбора канализационных насосных станций. Заполните форму и получите коммерческое предложение.</p>
+                        <button class="survey-btn" onclick="window.location.href='survey-kns.html'">
+                            Заполнить опросный лист
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ливневые стоки -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="survey-card">
+                    <div class="survey-icon">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <div class="survey-content">
+                        <h3 class="h4 mb-3" style="color: var(--primary-blue);">Очистные сооружения (ливневые стоки)</h3>
+                        <p class="text-muted mb-4">Для проектирования очистных сооружений для ливневых и нефтесодержащих стоков.</p>
+                        <button class="survey-btn" onclick="window.location.href='survey-storm.html'">
+                            Заполнить опросный лист
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Хозбытовые стоки -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="survey-card">
+                    <div class="survey-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="survey-content">
+                        <h3 class="h4 mb-3" style="color: var(--primary-blue);">Очистные сооружения (хозбытовые стоки)</h3>
+                        <p class="text-muted mb-4">Для проектирования очистных сооружений для хозяйственно-бытовых и промышленных стоков.</p>
+                        <button class="survey-btn" onclick="window.location.href='survey-domestic.html'">
+                            Заполнить опросный лист
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Шкаф управления -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="survey-card">
+                    <div class="survey-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="survey-content">
+                        <h3 class="h4 mb-3" style="color: var(--primary-blue);">Шкаф управления насосами</h3>
+                        <p class="text-muted mb-4">Для подготовки коммерческого предложения на шкаф управления Alta Control KNS.</p>
+                        <button class="survey-btn" onclick="window.location.href='survey-control.html'">
+                            Заполнить опросный лист
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Жироуловитель -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="survey-card">
+                    <div class="survey-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <div class="survey-content">
+                        <h3 class="h4 mb-3" style="color: var(--primary-blue);">Жироуловитель</h3>
+                        <p class="text-muted mb-4">Для точного подбора жироуловителя под ваши требования.</p>
+                        <button class="survey-btn" onclick="window.location.href='survey-grease.html'">
+                            Заполнить опросный лист
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center back-btn">
+            <button class="btn btn-outline-primary btn-lg" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left me-2"></i>Вернуться на главную
+            </button>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+</html>

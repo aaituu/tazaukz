@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Опросный лист для подбора КНС - ТОО «Экопласт»</title>
+    <link rel="icon" href="logo.png" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #00263d;
+            --secondary-blue: #009dd1;
+            --green: #5a7b46;
+            --dark-green: #468232;
+            --white: #ffffff;
+            --light-green-bg: #f8fff0;
+        }
+        
+        body {
+            background-color: var(--light-green-bg);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 80px;
+        }
+        
+        .survey-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .survey-form {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .form-section {
+            border-left: 4px solid var(--secondary-blue);
+            padding-left: 20px;
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        .form-title {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--green);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        
+        .form-label {
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        
+        .submit-btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(70, 130, 50, 0.3);
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(0, 157, 209, 0.25);
+        }
+        
+        .example-images {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .example-images h4 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .example-card {
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        
+        
+        .example-card:active:hover {
+            transform: translateY(-5px);
+            scale: 2;
+            z-index: 10;
+        }
+        
+        .example-card img {
+            object-fit: cover;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .survey-form {
+                padding: 20px;
+            }
+            
+            .form-section {
+                padding: 15px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-buttons button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header style="background-color: white; box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="logo.png" alt="Экопласт" height="50">
+                    <span style="font-weight: 600; color: var(--primary-blue);">ТОО «Экопласт»</span>
+                </a>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='surveys.html'">
+                        <i class="fas fa-list me-1"></i>Все опросы
+                    </button>
+                    <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='index.html'">
+                        <i class="fas fa-home me-1"></i>На главную
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="survey-container">
+        <div class="text-center mb-5 pt-4">
+            <h1 class="display-5 fw-bold" style="color: var(--primary-blue);">Опросный лист для подбора КНС</h1>
+            <p class="lead">Заполните форму и наши специалисты подготовят для Вас коммерческое предложение на подбор КНС</p>
+        </div>
+
+        <div class="survey-form">
+            <form id="knsSurveyForm">
+                <!-- Контактная информация -->
+                <div class="form-section">
+                    <h3 class="form-title">Контактная информация</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label required">Заказчик</label>
+                            <input type="text" class="form-control" id="customer" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">Контактное лицо</label>
+                            <input type="text" class="form-control" id="contactPerson" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Телефон</label>
+                            <input type="tel" class="form-control" id="phone">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label required">E-Mail</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Характеристики объекта -->
+                <div class="form-section">
+                    <h3 class="form-title">ХАРАКТЕРИСТИКИ ОБЪЕКТА</h3>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label">Адрес объекта</label>
+                            <input type="text" class="form-control" id="address" placeholder="Город, улица, дом">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Тип стоков</label>
+                            <select class="form-control" id="wasteType">
+                                <option value="">Выберите тип</option>
+                                <option value="бытовые">Хозяйственно-бытовые</option>
+                                <option value="ливневые">Ливневые</option>
+                                <option value="промышленные">Промышленные</option>
+                                <option value="смешанные">Смешанные</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Данные для отбора насоса -->
+                <div class="form-section">
+                    <h3 class="form-title">ДАННЫЕ ДЛЯ ОТБОРА НАСОСА</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Желаемый тип и марка насосов</label>
+                            <input type="text" class="form-control" id="pumpType" placeholder="Например: Grundfos, Wilo">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Расход Q, м³/ч</label>
+                            <input type="number" class="form-control" id="flowRate" step="0.1" placeholder="0.0">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Напор на выходе из КНС, м</label>
+                            <input type="number" class="form-control" id="pressure" step="0.1" placeholder="0.0">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Длина напорного трубопровода, м</label>
+                            <input type="number" class="form-control" id="pipelineLength" step="0.1" placeholder="0.0">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Потери напора в трубопроводе, ΔP</label>
+                            <input type="number" class="form-control" id="pressureLoss" step="0.1" placeholder="0.0">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Количество насосов (рабочий/резервный/на складе)</label>
+                            <input type="text" class="form-control" id="pumpsCount" placeholder="Например: 2/1/1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Параметры подводящего трубопровода -->
+                <div class="form-section">
+                    <h3 class="form-title">ПАРАМЕТРЫ ПОДВОДЯЩЕГО ТРУБОПРОВОДА</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Количество подводящих трубопроводов</label>
+                            <input type="number" class="form-control" id="inletPipesCount" min="1" value="1">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Наружный диаметр, мм</label>
+                            <input type="number" class="form-control" id="inletDiameter" placeholder="Например: 110">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Толщина стенки, мм</label>
+                            <input type="number" class="form-control" id="inletWallThickness" step="0.1" placeholder="Например: 3.2">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Глубина заложения лотка, мм</label>
+                            <input type="number" class="form-control" id="inletDepth" placeholder="Например: 1500">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Материал коллектора</label>
+                            <select class="form-control" id="inletMaterial">
+                                <option value="">Выберите материал</option>
+                                <option value="ПНД">ПНД</option>
+                                <option value="ПВХ">ПВХ</option>
+                                <option value="сталь">Сталь</option>
+                                <option value="чугун">Чугун</option>
+                                <option value="асбестоцемент">Асбестоцемент</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Тип соединения</label>
+                            <select class="form-control" id="inletConnection">
+                                <option value="">Выберите тип</option>
+                                <option value="фланцевое">Фланцевое</option>
+                                <option value="раструбное">Раструбное</option>
+                                <option value="сварное">Сварное</option>
+                                <option value="муфтовое">Муфтовое</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Параметры отводящего трубопровода -->
+                <div class="form-section">
+                    <h3 class="form-title">ПАРАМЕТРЫ ОТВОДЯЩЕГО ТРУБОПРОВОДА</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Количество отводящих трубопроводов</label>
+                            <input type="number" class="form-control" id="outletPipesCount" min="1" value="1">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Наружный диаметр, мм</label>
+                            <input type="number" class="form-control" id="outletDiameter" placeholder="Например: 110">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Толщина стенки, мм</label>
+                            <input type="number" class="form-control" id="outletWallThickness" step="0.1" placeholder="Например: 3.2">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Глубина заложения лотка, мм</label>
+                            <input type="number" class="form-control" id="outletDepth" placeholder="Например: 1500">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Материал коллектора</label>
+                            <select class="form-control" id="outletMaterial">
+                                <option value="">Выберите материал</option>
+                                <option value="ПНД">ПНД</option>
+                                <option value="ПВХ">ПВХ</option>
+                                <option value="сталь">Сталь</option>
+                                <option value="чугун">Чугун</option>
+                                <option value="асбестоцемент">Асбестоцемент</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Тип соединения</label>
+                            <select class="form-control" id="outletConnection">
+                                <option value="">Выберите тип</option>
+                                <option value="фланцевое">Фланцевое</option>
+                                <option value="раструбное">Раструбное</option>
+                                <option value="сварное">Сварное</option>
+                                <option value="муфтовое">Муфтовое</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шкаф управления -->
+                <div class="form-section">
+                    <h3 class="form-title">ПАРАМЕТРЫ ШКАФА УПРАВЛЕНИЯ КНС</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Температурное исполнение</label>
+                            <select class="form-control" id="temperature">
+                                <option value="">Выберите исполнение</option>
+                                <option value="стандартное">Стандартное (0°C...+40°C)</option>
+                                <option value="северное">Северное (-40°C...+40°C)</option>
+                                <option value="тропическое">Тропическое (+5°C...+50°C)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Напряжение питания, В</label>
+                            <select class="form-control" id="voltage">
+                                <option value="">Выберите напряжение</option>
+                                <option value="220">220 В</option>
+                                <option value="380">380 В</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="avr">
+                                <label class="form-check-label" for="avr">Автоматическое управление вводом резервного питания (АВР)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="softStart">
+                                <label class="form-check-label" for="softStart">Плавный пуск насосов</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="frequencyConverter">
+                                <label class="form-check-label" for="frequencyConverter">Преобразователь частоты</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="valveControl">
+                                <label class="form-check-label" for="valveControl">Автоматическое управление задвижками КНС</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="currentIndicator">
+                                <label class="form-check-label" for="currentIndicator">Индикация тока на лицевой панели</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="voltageIndicator">
+                                <label class="form-check-label" for="voltageIndicator">Индикация входного напряжения на лицевой панели</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Примеры изображений -->
+                <div class="example-images">
+                    <h4><i class="fas fa-images me-2"></i>Примеры для заполнения</h4>
+                    <p class="text-muted mb-4">Используйте эти примеры для правильного заполнения данных</p>
+                    <div class="row g-3">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card example-card">
+                                <img src="img/diapin.png" class="card-img-top" alt="Пример схемы КНС" onerror="this.src='https://via.placeholder.com/300x180/E8FFDA/5A7B46?text=Пример+1'">
+                           
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card example-card">
+                                <img src="img/diapout.png" class="card-img-top" alt="Пример подключения" onerror="this.src='https://via.placeholder.com/300x180/E8FFDA/5A7B46?text=Пример+2'">
+                            
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card example-card">
+                                <img src="img/955.png" class="card-img-top" alt="Пример шкафа управления" onerror="this.src='https://via.placeholder.com/300x180/E8FFDA/5A7B46?text=Пример+3'">
+                             
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card example-card">
+                                <img src="img/1500.png" class="card-img-top" alt="Пример монтажа" onerror="this.src='https://via.placeholder.com/300x180/E8FFDA/5A7B46?text=Пример+4'">
+                               
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card example-card">
+                                <img src="img/1220.png" class="card-img-top" alt="Пример трубопровода" onerror="this.src='https://via.placeholder.com/300x180/E8FFDA/5A7B46?text=Пример+5'">
+                             
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card example-card">
+                                <img src="img/1900.png" class="card-img-top" alt="Пример автоматики" onerror="this.src='https://via.placeholder.com/300x180/E8FFDA/5A7B46?text=Пример+6'">
+                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Дополнительные сведения -->
+                <div class="form-section">
+                    <h3 class="form-title">ДОПОЛНИТЕЛЬНЫЕ СВЕДЕНИЯ</h3>
+                    <div class="mb-3">
+                        <label class="form-label">Комментарии или особые требования</label>
+                        <textarea class="form-control" id="comments" rows="3" placeholder="Укажите дополнительные требования или комментарии..."></textarea>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" id="agree" required>
+                        <label class="form-check-label required" for="agree">
+                            Я согласен на обработку персональных данных
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Кнопка отправки -->
+                <div class="text-center mt-5">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane me-2"></i>Отправить опросный лист
+                    </button>
+                </div>
+            </form>
+            
+            <div id="successMessage" class="alert alert-success mt-4 text-center" style="display: none;">
+                <i class="fas fa-check-circle me-2"></i> 
+                <strong>Ваш опросный лист отправлен!</strong><br>
+                Мы свяжемся с вами в ближайшее время для подготовки коммерческого предложения.
+            </div>
+        </div>
+
+        <!-- Навигационные кнопки -->
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Инициализация EmailJS
+        (function() {
+            emailjs.init("GuD2XBC894z6ShpZu");
+        })();
+
+        // Обработка формы
+        document.getElementById('knsSurveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!document.getElementById('agree').checked) {
+                alert('Пожалуйста, дайте согласие на обработку персональных данных');
+                return;
+            }
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Отправка...';
+            submitBtn.disabled = true;
+
+            // Собираем данные формы
+            const formData = {
+                surveyType: 'Опросный лист для подбора КНС',
+                customer: document.getElementById('customer').value,
+                contactPerson: document.getElementById('contactPerson').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                wasteType: document.getElementById('wasteType').value,
+                pumpType: document.getElementById('pumpType').value,
+                flowRate: document.getElementById('flowRate').value,
+                pressure: document.getElementById('pressure').value,
+                pipelineLength: document.getElementById('pipelineLength').value,
+                pressureLoss: document.getElementById('pressureLoss').value,
+                pumpsCount: document.getElementById('pumpsCount').value,
+                inletPipesCount: document.getElementById('inletPipesCount').value,
+                inletDiameter: document.getElementById('inletDiameter').value,
+                inletWallThickness: document.getElementById('inletWallThickness').value,
+                inletDepth: document.getElementById('inletDepth').value,
+                inletMaterial: document.getElementById('inletMaterial').value,
+                inletConnection: document.getElementById('inletConnection').value,
+                outletPipesCount: document.getElementById('outletPipesCount').value,
+                outletDiameter: document.getElementById('outletDiameter').value,
+                outletWallThickness: document.getElementById('outletWallThickness').value,
+                outletDepth: document.getElementById('outletDepth').value,
+                outletMaterial: document.getElementById('outletMaterial').value,
+                outletConnection: document.getElementById('outletConnection').value,
+                temperature: document.getElementById('temperature').value,
+                voltage: document.getElementById('voltage').value,
+                avr: document.getElementById('avr').checked ? 'Да' : 'Нет',
+                softStart: document.getElementById('softStart').checked ? 'Да' : 'Нет',
+                frequencyConverter: document.getElementById('frequencyConverter').checked ? 'Да' : 'Нет',
+                valveControl: document.getElementById('valveControl').checked ? 'Да' : 'Нет',
+                currentIndicator: document.getElementById('currentIndicator').checked ? 'Да' : 'Нет',
+                voltageIndicator: document.getElementById('voltageIndicator').checked ? 'Да' : 'Нет',
+                comments: document.getElementById('comments').value,
+                date: new Date().toLocaleString('ru-RU')
+            };
+
+            try {
+                // Формируем сообщение
+                const message = `
+Тип опросного листа: ${formData.surveyType}
+
+КОНТАКТНАЯ ИНФОРМАЦИЯ:
+Заказчик: ${formData.customer}
+Контактное лицо: ${formData.contactPerson}
+Телефон: ${formData.phone}
+Email: ${formData.email}
+
+ХАРАКТЕРИСТИКИ ОБЪЕКТА:
+Адрес объекта: ${formData.address}
+Тип стоков: ${formData.wasteType}
+
+ДАННЫЕ ДЛЯ ОТБОРА НАСОСА:
+Тип и марка насосов: ${formData.pumpType}
+Расход Q: ${formData.flowRate} м³/ч
+Напор на выходе из КНС: ${formData.pressure} м
+Длина напорного трубопровода: ${formData.pipelineLength} м
+Потери напора в трубопроводе: ${formData.pressureLoss}
+Количество насосов: ${formData.pumpsCount}
+
+ПАРАМЕТРЫ ПОДВОДЯЩЕГО ТРУБОПРОВОДА:
+Количество трубопроводов: ${formData.inletPipesCount}
+Диаметр: ${formData.inletDiameter} мм
+Толщина стенки: ${formData.inletWallThickness} мм
+Глубина заложения: ${formData.inletDepth} мм
+Материал: ${formData.inletMaterial}
+Тип соединения: ${formData.inletConnection}
+
+ПАРАМЕТРЫ ОТВОДЯЩЕГО ТРУБОПРОВОДА:
+Количество трубопроводов: ${formData.outletPipesCount}
+Диаметр: ${formData.outletDiameter} мм
+Толщина стенки: ${formData.outletWallThickness} мм
+Глубина заложения: ${formData.outletDepth} мм
+Материал: ${formData.outletMaterial}
+Тип соединения: ${formData.outletConnection}
+
+ПАРАМЕТРЫ ШКАФА УПРАВЛЕНИЯ:
+Температурное исполнение: ${formData.temperature}
+Напряжение питания: ${formData.voltage} В
+АВР: ${formData.avr}
+Плавный пуск: ${formData.softStart}
+Преобразователь частоты: ${formData.frequencyConverter}
+Управление задвижками: ${formData.valveControl}
+Индикация тока: ${formData.currentIndicator}
+Индикация напряжения: ${formData.voltageIndicator}
+
+ДОПОЛНИТЕЛЬНЫЕ СВЕДЕНИЯ:
+${formData.comments}
+
+Дата заполнения: ${formData.date}
+                `.trim();
+
+                // Отправка через EmailJS
+                const response = await emailjs.send(
+                    "tazau",
+                    "template_s1gw5fk",
+                    {
+                        name: formData.contactPerson,
+                        phone: formData.phone,
+                        email: formData.email,
+                        message: message,
+                        date: formData.date,
+                        subject: `Новый опросный лист: ${formData.surveyType}`
+                    }
+                );
+
+                if (response.status === 200) {
+                    // Показываем сообщение об успехе
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Сбрасываем форму
+                    this.reset();
+                    
+                    // Прокручиваем к сообщению
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                }
+            } catch (error) {
+                console.error('Ошибка отправки:', error);
+                alert('Ошибка при отправке формы. Пожалуйста, попробуйте еще раз или позвоните нам.');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
