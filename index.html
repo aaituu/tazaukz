@@ -1,0 +1,2309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ТОО «Экопласт» - Завод инженерных систем - Изделия из полипропилена</title>
+    <link rel="icon" href="logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="logo.png" />
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <style>
+      :root {
+        --primary-blue: #00263d;
+        --secondary-blue: #009dd1;
+        --light-blue: #97e7f5;
+        --green: #5a7b46;
+        --dark-green: #468232;
+        --white: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--white);
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* Header & Navigation */
+      header {
+        background-color: var(--white);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        padding: 10px 0;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        padding: 0;
+      }
+
+      .navbar-brand img {
+        margin-right: 10px;
+        height: 50px;
+        width: auto;
+      }
+
+      .company-name {
+        height: 50px;
+        object-fit: contain;
+      }
+
+      .company-tagline {
+        color: var(--secondary-blue);
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: -5px;
+      }
+
+      .nav-phone {
+        color: var(--primary-blue);
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 13px;
+        margin-bottom: -10px;
+        transition: all 0.3s;
+        white-space: nowrap;
+      }
+
+      .nav-phone:hover {
+        color: var(--secondary-blue);
+        transform: translateY(-2px);
+      }
+
+      .nav-link {
+        color: var(--primary-blue) !important;
+        font-weight: 500;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+        padding: 8px 15px !important;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .nav-link.phone {
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      
+      .nav-link:hover {
+        color: var(--secondary-blue) !important;
+        background-color: rgba(1, 55, 125, 0.05);
+      }
+
+      /* Активный элемент с плавной анимацией */
+      .navbar-nav {
+        position: relative;
+      }
+
+      .nav-link.active {
+        color: var(--white) !important;
+        font-weight: 600;
+        background-color: transparent !important;
+        position: relative;
+        z-index: 2;
+      }
+
+      .nav-link.active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--green);
+        border-radius: 5px;
+        z-index: -1;
+        animation: slideIn 0.3s ease-out forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: scaleX(0);
+          opacity: 0;
+        }
+        to {
+          transform: scaleX(1);
+          opacity: 1;
+        }
+      }
+
+      /* Индикатор для плавного перехода */
+      .nav-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: var(--green);
+        border-radius: 5px;
+        z-index: 1;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .nav-indicator.visible {
+        opacity: 1;
+      }
+
+      .header-btn {
+        background-color: var(--green);
+        color: var(--white);
+        border: none;
+        padding: 10px 25px;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s;
+        white-space: nowrap;
+      }
+
+      .header-btn:hover {
+        background-color: var(--dark-green);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(126, 211, 72, 0.3);
+      }
+
+      /* Mobile menu adjustments */
+      @media (max-width: 991px) {
+        .navbar-collapse {
+          background-color: var(--white);
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          margin-top: 15px;
+        }
+
+        .nav-link {
+          margin: 5px 0;
+          text-align: center;
+          position: relative;
+          display: block;
+          width: 100%;
+        }
+
+        .nav-indicator {
+          display: none;
+        }
+
+        .nav-link.active::before {
+          animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .nav-phone {
+          display: block;
+          text-align: center;
+          margin-bottom: 10px;
+          font-size: 10px;
+        }
+
+        .header-btn {
+          margin-top: 15px;
+          width: 100%;
+          text-align: center;
+        }
+        
+        .company-tagline {
+          font-size: 12px;
+        }
+      }
+
+      /* Sticky header effect */
+      .navbar-scrolled {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        padding: 5px 0;
+      }
+
+      /* Hero section margin fix for fixed header */
+      .hero {
+        margin-top: 80px;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(
+            rgba(1, 55, 125, 0.8),
+            rgba(0, 157, 209, 0.7)
+          ),
+          url("banner.png");
+        background-size: cover;
+        background-position: center;
+        color: var(--white);
+        padding: 180px 0 100px;
+        margin-top: 76px;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        max-width: 700px;
+      }
+
+      .hero-btn {
+        background-color: var(--green);
+        color: var(--white);
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border: none;
+        transition: all 0.3s;
+      }
+
+      .hero-btn:hover {
+        background-color: var(--dark-green);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Products Section */
+      .section-title {
+        color: var(--primary-blue);
+        font-weight: 700;
+        margin-bottom: 50px;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .section-title:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background-color: var(--green);
+        transition: width 0.3s ease;
+      }
+
+      .section-title.text-center:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .products-section {
+        padding: 100px 0;
+      }
+
+      .product-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s;
+        height: 100%;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        border-color: var(--light-blue);
+      }
+
+      .product-img {
+        height: 200px;
+        background-color: var(--light-blue);
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-img::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(0, 38, 61, 0.1)
+        );
+        z-index: 1;
+      }
+
+      .product-content {
+        padding: 20px;
+      }
+
+      .product-title {
+        color: var(--primary-blue);
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .product-description {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      /* Product Details Modal */
+      .product-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 2000;
+        overflow-y: auto;
+        padding: 20px;
+      }
+
+      .product-modal-content {
+        background-color: var(--white);
+        max-width: 800px;
+        margin: 50px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        animation: modalFadeIn 0.5s;
+      }
+
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-header {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        padding: 20px;
+        position: relative;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        color: var(--white);
+        font-size: 1.8rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        transition: transform 0.3s ease;
+      }
+
+      .close-modal:hover {
+        transform: rotate(90deg);
+      }
+
+      .modal-body {
+        padding: 30px;
+      }
+
+      .features-list {
+        list-style-type: none;
+        margin: 20px 0;
+      }
+
+      .features-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+        transition: all 0.3s ease;
+      }
+
+      .features-list li:hover {
+        padding-left: 10px;
+        color: var(--primary-blue);
+      }
+
+      .features-list li:before {
+        content: "✓";
+        color: var(--green);
+        margin-right: 10px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .features-list li:hover:before {
+        color: var(--secondary-blue);
+        transform: scale(1.2);
+      }
+
+      /* Services Grid Section */
+      .services-grid-section {
+        padding: 100px 0;
+        background-color: #f8f9fa;
+      }
+
+      .service-grid-item {
+        background-color: var(--white);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        height: 100%;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 30px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .service-grid-item:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        z-index: 2;
+      }
+
+      .service-grid-image {
+        height: 250px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-grid-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+        z-index: 1;
+        transition: all 0.4s;
+      }
+
+      .service-grid-item:hover .service-grid-image::before {
+        background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+      }
+
+      .service-grid-content {
+        padding: 30px;
+        position: relative;
+      }
+
+      .service-grid-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--green);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.4s;
+      }
+
+      .service-grid-item:hover .service-grid-content::before {
+        transform: scaleX(1);
+      }
+
+      .service-grid-title {
+        color: var(--primary-blue);
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+        transition: color 0.3s;
+      }
+
+      .service-grid-item:hover .service-grid-title {
+        color: var(--secondary-blue);
+      }
+
+      .service-grid-description {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      /* Animated button */
+      .service-grid-btn {
+        background: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-weight: 600;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s;
+        display: inline-block;
+        text-decoration: none;
+        z-index: 1;
+      }
+
+      .service-grid-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: var(--green);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+        z-index: -1;
+      }
+
+      .service-grid-item.green-highlight:hover .service-grid-btn::before {
+        width: 300px;
+        height: 300px;
+        background: var(--green);
+      }
+
+      .service-grid-item.blue-highlight:hover .service-grid-btn::before {
+        width: 300px;
+        height: 300px;
+        background: var(--secondary-blue);
+      }
+
+      .service-grid-item:hover .service-grid-btn {
+        color: var(--white);
+        border-color: transparent;
+      }
+
+      /* Special highlight effect on hover */
+      .service-grid-item::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, rgba(151, 231, 245, 0.2) 0%, transparent 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: width 0.6s, height 0.6s, opacity 0.6s;
+        z-index: 0;
+      }
+
+      .service-grid-item:hover::after {
+        width: 400px;
+        height: 400px;
+        opacity: 1;
+      }
+
+      .service-grid-item.green-highlight:hover::after {
+        background: radial-gradient(circle, rgba(90, 123, 70, 0.15) 0%, transparent 70%);
+      }
+
+      .service-grid-item.blue-highlight:hover::after {
+        background: radial-gradient(circle, rgba(0, 157, 209, 0.15) 0%, transparent 70%);
+      }
+
+      /* Gallery Section */
+      .gallery-section {
+        padding: 100px 0;
+      }
+
+      .gallery-title {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        height: 300px;
+        cursor: pointer;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 38, 61, 0.9), transparent);
+        color: white;
+        padding: 20px;
+        transform: translateY(100%);
+        transition: transform 0.3s;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        transform: translateY(0);
+      }
+
+      /* About Section */
+      .about-section {
+        background-color: #f8f9fa;
+        padding: 100px 0;
+      }
+
+      .about-content {
+        padding: 20px;
+      }
+
+      .about-icon {
+        font-size: 2.5rem;
+        color: var(--secondary-blue);
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .about-content:hover .about-icon {
+        transform: scale(1.1) rotate(5deg);
+        color: var(--green);
+      }
+
+      /* Contact Form */
+      .contact-section {
+        padding: 100px 0;
+        background-color: var(--white);
+      }
+
+      .contact-form {
+        background-color: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      .contact-form:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        transform: translateY(-5px);
+      }
+
+      .form-control {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        border-color: var(--secondary-blue);
+        box-shadow: 0 0 0 0.2rem rgba(0, 157, 209, 0.25);
+        transform: translateY(-2px);
+      }
+
+      .submit-btn {
+        background-color: var(--green);
+        color: var(--white);
+        padding: 12px 30px;
+        border-radius: 5px;
+        border: none;
+        font-weight: 600;
+        width: 100%;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .submit-btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .submit-btn:hover {
+        background-color: var(--dark-green);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(70, 130, 50, 0.3);
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--primary-blue);
+        color: var(--white);
+        padding: 60px 0 20px;
+        transition: all 0.3s ease;
+      }
+
+      .footer-title {
+        color: var(--light-blue);
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .footer-links {
+        list-style-type: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .footer-links a {
+        color: #ddd;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+      }
+
+      .footer-links a:hover {
+        color: var(--green);
+        padding-left: 5px;
+        transform: translateX(5px);
+      }
+
+      .copyright {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #aaa;
+        transition: all 0.3s ease;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero {
+          padding: 150px 0 80px;
+        }
+
+        .products-section,
+        .services-grid-section,
+        .gallery-section,
+        .about-section,
+        .contact-section {
+          padding: 60px 0;
+        }
+        
+        .service-grid-item {
+          margin-bottom: 20px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+        
+        .service-grid-image {
+          height: 200px;
+        }
+        
+        .service-grid-content {
+          padding: 20px;
+        }
+        
+        .gallery-item {
+          height: 250px;
+        }
+        
+        .nav-link.active::before {
+          animation: fadeIn 0.3s ease-out forwards;
+        }
+      }
+
+      .success-message {
+        display: none;
+        background-color: var(--dark-green);
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 20px;
+        text-align: center;
+        animation: slideInUp 0.5s ease-out forwards;
+      }
+
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Modal styles for gallery */
+      .gallery-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 3000;
+        padding: 20px;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .gallery-modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        margin: auto;
+        display: block;
+        border-radius: 10px;
+        animation: zoomIn 0.4s ease-out;
+      }
+
+      @keyframes zoomIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .gallery-modal-caption {
+        text-align: center;
+        color: white;
+        padding: 10px;
+        font-size: 1.2rem;
+        animation: fadeIn 0.5s ease-out 0.2s forwards;
+        opacity: 0;
+      }
+
+      .close-gallery-modal {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        z-index: 3001;
+        transition: all 0.3s ease;
+      }
+
+      .close-gallery-modal:hover {
+        transform: rotate(90deg);
+        color: var(--light-blue);
+      }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="#home">
+            <img
+              src="logo.png"
+              alt="Экопласт"
+              height="50"
+              class="d-inline-block align-text-top"
+            />
+            <div>
+              <img
+                src="text.png"
+                alt="ТОО Экопласт"
+                height="50"
+                class="company-name d-none d-md-inline"
+              />
+              <div class="company-tagline d-none d-md-block">Завод инженерных систем</div>
+            </div>
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto position-relative">
+              <!-- Индикатор для плавного перемещения -->
+              <div class="nav-indicator" id="navIndicator"></div>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="#home">Главная</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="#services">Услуги</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#gallery">Галерея</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#products">Продукция</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">О нас</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact">Контакты</a>
+              </li>
+              <li>
+                <a href="tel:87765570937" class="nav-link phone">
+                  <i class="fas fa-phone-alt me-2"></i>+7 (776) 557-09-37
+                </a>
+              </li>
+            </ul>
+            <button class="header-btn ms-3" onclick="showApplicationForm()">
+              Заявка
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-8" data-aos="fade-right">
+            <h1>Завод инженерных систем «Экопласт»</h1>
+            <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: 600;">Изделия из полипропилена для систем водоотведения и очистки</h2>
+            <p>
+              Компания <strong>ТОО «Экопласт»</strong> - Завод инженерных систем предлагает
+              проектирование, изготовление и поставку надежных и долговечных
+              решений для коммунальных, промышленных и коммерческих объектов.
+            </p>
+            <button
+              class="hero-btn"
+              onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})"
+            >
+              Наши услуги <i class="fas fa-arrow-down ms-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid Section -->
+    <section class="services-grid-section" id="services">
+      <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">
+          Наши услуги
+        </h2>
+        
+        <div class="row g-4">
+          <!-- Row 1: 2 items -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-grid-item green-highlight">
+              <div class="service-grid-image" style="background-image: url('img/proektirovanie.jpeg');"></div>
+              <div class="service-grid-content">
+                <h3 class="service-grid-title">Проектирование инженерных систем</h3>
+                <p class="service-grid-description">
+                  Разработка индивидуальных проектов КНС, очистных сооружений, 
+                  систем пожаротушения и повышения давления с учетом всех 
+                  технических требований и условий эксплуатации.
+                </p>
+                <button class="service-grid-btn" onclick="showApplicationFormForService('Проектирование инженерных систем')">
+                  Заказать услугу
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-grid-item blue-highlight">
+              <div class="service-grid-image" style="background-image: url('img/soz.jpeg');"></div>
+              <div class="service-grid-content">
+                <h3 class="service-grid-title">Изготовление изделий из полипропилена</h3>
+                <p class="service-grid-description">
+                  Производство КНС, жироуловителей, пескоуловителей, очистных 
+                  сооружений и технологических емкостей на собственном современном 
+                  оборудовании с контролем качества на всех этапах.
+                </p>
+                <button class="service-grid-btn" onclick="showApplicationFormForService('Изготовление изделий из полипропилена')">
+                  Заказать услугу
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: 2 items -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-grid-item green-highlight">
+              <div class="service-grid-image" style="background-image: url('img/pavilion.jpeg');"></div>
+              <div class="service-grid-content">
+                <h3 class="service-grid-title">Изготовление технических павильонов</h3>
+                <p class="service-grid-description">
+                  Производство защитных павильонов для оборудования, 
+                  КТП, распределительных устройств с индивидуальными 
+                  размерами и комплектацией. Павильоны из полипропилена 
+                  устойчивы к коррозии и внешним воздействиям.
+                </p>
+                <button class="service-grid-btn" onclick="showApplicationFormForService('Изготовление технических павильонов')">
+                  Заказать услугу
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="service-grid-item blue-highlight">
+              <div class="service-grid-image" style="background-image: url('img/pojar.jpeg');"></div>
+              <div class="service-grid-content">
+                <h3 class="service-grid-title">Станции пожаротушения и повышения давления</h3>
+                <p class="service-grid-description">
+                  Изготовление насосных станций пожаротушения и повышения 
+                  давления из полипропилена. Индивидуальное проектирование 
+                  под конкретные требования по расходу и напору.
+                </p>
+                <button class="service-grid-btn" onclick="showApplicationFormForService('Станции пожаротушения и повышения давления')">
+                  Заказать услугу
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: 2 items -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-grid-item green-highlight">
+              <div class="service-grid-image" style="background-image: url('img/pogreb.jpeg');"></div>
+              <div class="service-grid-content">
+                <h3 class="service-grid-title">Изготовление погребов</h3>
+                <p class="service-grid-description">
+                  Производство полипропиленовых погребов для хранения 
+                  овощей и консервации. Герметичные конструкции с 
+                  вентиляцией, устойчивые к влаге и перепадам температур.
+                </p>
+                <button class="service-grid-btn" onclick="showApplicationFormForService('Изготовление погребов')">
+                  Заказать услугу
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="350">
+            <div class="service-grid-item blue-highlight">
+              <div class="service-grid-image" style="background-image: url('img/montaj.jpeg');"></div>
+              <div class="service-grid-content">
+                <h3 class="service-grid-title">Монтаж и пусконаладка</h3>
+                <p class="service-grid-description">
+                  Профессиональный монтаж оборудования на объекте заказчика, 
+                  пусконаладка, тестирование систем и обучение персонала. 
+                  Полный комплекс услуг "под ключ".
+                </p>
+                <button class="service-grid-btn" onclick="showApplicationFormForService('Монтаж и пусконаладка')">
+                  Заказать услугу
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+      <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">
+          Наше производство и объекты
+        </h2>
+        
+        <div class="row">
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="gallery-item" onclick="openGalleryModal('img/ceh.jpeg', 'Производственный цех')">
+              <img src="img/ceh.jpeg" alt="Производственный цех">
+              <div class="gallery-overlay">
+                <h5>Производственный цех</h5>
+                <p>Современное оборудование для сварки полипропилена</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+            <div class="gallery-item" onclick="openGalleryModal('img/product.jpeg', 'Готовая продукция')">
+              <img src="img/product.jpeg" alt="Готовая продукция">
+              <div class="gallery-overlay">
+                <h5>Готовая продукция</h5>
+                <p>КНС и очистные сооружения на складе готовой продукции</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="gallery-item" onclick="openGalleryModal('img/otgruzka.jpg', 'Отгрузка оборудования')">
+              <img src="img/otgruzka.jpg" alt="Отгрузка оборудования">
+              <div class="gallery-overlay">
+                <h5>Отгрузка оборудования</h5>
+                <p>Подготовка к отправке заказчику</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="250">
+            <div class="gallery-item" onclick="openGalleryModal('img/montaj.jpeg', 'Объект монтажа')">
+              <img src="img/montaj.jpeg" alt="Объект монтажа">
+              <div class="gallery-overlay">
+                <h5>Объект монтажа</h5>
+                <p>Установка оборудования на объекте заказчика</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="gallery-item" onclick="openGalleryModal('img/chek.jpeg', 'Контроль качества')">
+              <img src="img/chek.jpeg" alt="Контроль качества">
+              <div class="gallery-overlay">
+                <h5>Контроль качества</h5>
+                <p>Проверка швов и герметичности</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="350">
+            <div class="gallery-item" onclick="openGalleryModal('img/progres.jpg', 'Изделия в производстве')">
+              <img src="img/progres.jpg" alt="Изделия в производстве">
+              <div class="gallery-overlay">
+                <h5>Изделия в производстве</h5>
+                <p>Технологические емкости на разных этапах изготовления</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="gallery-modal">
+      <button class="close-gallery-modal" onclick="closeGalleryModal()">&times;</button>
+      <img id="galleryModalImage" class="gallery-modal-content" src="" alt="">
+      <div id="galleryModalCaption" class="gallery-modal-caption"></div>
+    </div>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+      <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">
+          Наша продукция
+        </h2>
+        <div class="row g-4">
+          <!-- Product 1 - КНС -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="product-card" onclick="showProductDetails('kns')">
+              <div class="product-img" style="background-image: url('kanal.jpg')"></div>
+              <div class="product-content">
+                <h3 class="product-title">Канализационные насосные станции (КНС)</h3>
+                <p class="product-description">
+                  Надежные системы для перекачки сточных вод с индивидуальным
+                  проектированием.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 - Жироуловители -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <div class="product-card" onclick="showProductDetails('grease')">
+              <div class="product-img" style="background-image: url('jir1.jpg')"></div>
+              <div class="product-content">
+                <h3 class="product-title">Жироуловители</h3>
+                <p class="product-description">
+                  Эффективные системы для улавливания жиров и масел из сточных
+                  вод.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 - Пескоуловители -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="product-card" onclick="showProductDetails('sand')">
+              <div class="product-img" style="background-image: url('pesok.jpg')"></div>
+              <div class="product-content">
+                <h3 class="product-title">Пескоуловители</h3>
+                <p class="product-description">
+                  Устройства для очистки сточных вод от песка и тяжелых частиц.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 - Очистные сооружения -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+            <div class="product-card" onclick="showProductDetails('cleaning')">
+              <div class="product-img" style="background-image: url('ochist.jpeg')"></div>
+              <div class="product-content">
+                <h3 class="product-title">Очистные сооружения</h3>
+                <p class="product-description">
+                  Комплексные решения для очистки хозяйственно-бытовых стоков.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 - Технологические емкости -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="product-card" onclick="showProductDetails('tanks')">
+              <div class="product-img" style="background-image: url('emkost.jpeg')"></div>
+              <div class="product-content">
+                <h3 class="product-title">Технологические емкости</h3>
+                <p class="product-description">
+                  Емкости и корпуса из полипропилена для технологических
+                  процессов.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 - Комплектующие -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="350">
+            <div class="product-card" onclick="showProductDetails('complex')">
+              <div class="product-img" style="background-image: url('komplekt.jpeg')"></div>
+              <div class="product-content">
+                <h3 class="product-title">Комплектующие</h3>
+                <p class="product-description">
+                  Патрубки, фланцы, люки, лестницы, автоматика и другие
+                  элементы.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">
+          Почему выбирают нас
+        </h2>
+        <div class="row">
+          <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="about-content text-center">
+              <div class="about-icon">
+                <i class="fas fa-industry"></i>
+              </div>
+              <h4>Собственное производство</h4>
+              <p>
+                Полный контроль качества на каждом этапе изготовления изделий из
+                полипропилена.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="about-content text-center">
+              <div class="about-icon">
+                <i class="fas fa-cogs"></i>
+              </div>
+              <h4>Индивидуальное проектирование</h4>
+              <p>
+                Изготовление по техническому заданию заказчика с учетом условий
+                эксплуатации.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="about-content text-center">
+              <div class="about-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h4>Гарантия качества</h4>
+              <p>
+                Срок службы изделий - не менее 50 лет благодаря использованию
+                промышленного полипропилена.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-lg-6" data-aos="fade-right">
+            <h3 class="mb-4" style="color: var(--primary-blue)">
+              Материалы и технологии
+            </h3>
+            <ul class="features-list">
+              <li>Полипропилен (PP) промышленного класса</li>
+              <li>Высокая химическая и коррозионная стойкость</li>
+              <li>Устойчивость к агрессивным средам и перепадам температур</li>
+              <li>Современные методы сварки (экструзионная и ручная)</li>
+              <li>Усиленные конструкции с ребрами жесткости</li>
+              <li>Расчет прочности под подземную и наземную установку</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left">
+            <h3 class="mb-4" style="color: var(--primary-blue)">
+              Области применения
+            </h3>
+            <div class="row">
+              <div class="col-6">
+                <ul class="features-list">
+                  <li>Жилые и коммерческие объекты</li>
+                  <li>Промышленные предприятия</li>
+                  <li>АЗС и автомойки</li>
+                  <li>Торговые центры</li>
+                </ul>
+              </div>
+              <div class="col-6">
+                <ul class="features-list">
+                  <li>Агропромышленные комплексы</li>
+                  <li>Коммунальная инфраструктура</li>
+                  <li>Очистные сооружения</li>
+                  <li>Насосные станции</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+            <h2 class="section-title">Контакты</h2>
+            <div class="mb-4">
+              <h4 style="color: var(--primary-blue)">ТОО «Экопласт»</h4>
+              <h5 style="color: var(--secondary-blue)">Завод инженерных систем</h5>
+              <p>
+                <i class="fas fa-map-marker-alt me-2" style="color: var(--secondary-blue)"></i>
+                г. Астана, ул. Жанибека Тархана, 2
+              </p>
+              <p>
+                <i class="fas fa-phone me-2" style="color: var(--secondary-blue)"></i>
+                8 (776) 167-20-71, 8 (778) 557-09-37
+              </p>
+              <p>
+                <i class="fas fa-envelope me-2" style="color: var(--secondary-blue)"></i>
+                <span id="contact-email">too.ekoplast@yandex.kz</span>
+              </p>
+            </div>
+
+            <div class="mb-4">
+              <h5 style="color: var(--primary-blue)">Сроки и условия</h5>
+              <ul class="features-list">
+                <li>Срок изготовления: от 5 рабочих дней</li>
+                <li>Гарантия: от 12 месяцев</li>
+                <li>Условия оплаты: по договору</li>
+                <li>Доставка: по Казахстану и СНГ</li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 style="color: var(--primary-blue)">Стоимость</h5>
+              <p>
+                Стоимость рассчитывается индивидуально и зависит от типа
+                изделия, объема, габаритов, толщины стенок, комплектации и
+                условий эксплуатации.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="contact-form">
+              <h3 class="mb-4" style="color: var(--primary-blue)">
+                Оставить заявку
+              </h3>
+              <p class="mb-4">
+                Оставьте заявку и мы свяжемся с вами в ближайшее время для
+                расчета стоимости!
+              </p>
+
+              <form id="applicationForm">
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Ваше имя"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    placeholder="Ваш телефон"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Ваш email"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    rows="4"
+                    placeholder="Комментарий или описание задачи"
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <select class="form-control" id="productType">
+                    <option value="">Выберите тип продукции</option>
+                    <option value="КНС">
+                      Канализационные насосные станции
+                    </option>
+                    <option value="Жироуловители">Жироуловители</option>
+                    <option value="Пескоуловители">Пескоуловители</option>
+                    <option value="Очистные сооружения">
+                      Очистные сооружения
+                    </option>
+                    <option value="Емкости">Технологические емкости</option>
+                    <option value="Другое">Другое</option>
+                  </select>
+                </div>
+                <button type="submit" class="submit-btn">
+                  <span class="btn-text">Отправить заявку</span>
+                  <span class="btn-loading" style="display: none">
+                    <i class="fas fa-spinner fa-spin"></i> Отправка...
+                  </span>
+                </button>
+              </form>
+
+              <div id="successMessage" class="success-message">
+                <i class="fas fa-check-circle me-2"></i> Ваша заявка отправлена!
+                Мы свяжемся с вами в ближайшее время.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <h3 class="footer-title">ТОО «Экопласт»</h3>
+            <h4 class="footer-title" style="color: var(--light-blue); font-size: 1rem;">Завод инженерных систем</h4>
+            <p>
+              Проектирование, изготовление и поставка изделий из полипропилена
+              для систем водоотведения, очистки и инженерной инфраструктуры.
+            </p>
+          </div>
+
+          <div class="col-lg-4 mb-4">
+            <h3 class="footer-title">Навигация</h3>
+            <ul class="footer-links">
+              <li><a href="#home">Главная</a></li>
+              <li><a href="#services">Услуги</a></li>
+              <li><a href="#gallery">Галерея</a></li>
+              <li><a href="#products">Продукция</a></li>
+              <li><a href="#about">О нас</a></li>
+              <li><a href="#contact">Контакты</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 mb-4">
+            <h3 class="footer-title">Контакты</h3>
+            <ul class="footer-links">
+              <li>
+                <i class="fas fa-map-marker-alt me-2"></i> г. Астана, ул.
+                Жанибека Тархана, 2
+              </li>
+              <li><i class="fas fa-phone me-2"></i> 8 (776) 167-20-71</li>
+              <li><i class="fas fa-phone me-2"></i> 8 (778) 557-09-37</li>
+              <li>
+                <i class="fas fa-envelope me-2"></i>
+                <span id="footer-email">too.ekoplast@yandex.kz</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>&copy; 2023 ТОО «Экопласт» - Завод инженерных систем. Все права защищены.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Product Details Modal -->
+    <div id="productModal" class="product-modal">
+      <div class="product-modal-content">
+        <div class="modal-header">
+          <h3 id="modalProductTitle">Канализационные насосные станции (КНС)</h3>
+          <button class="close-modal" onclick="closeProductModal()">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <h5 style="color: var(--primary-blue)">Описание</h5>
+              <p id="modalProductDescription">
+                Канализационные насосные станции предназначены для перекачки
+                хозяйственно-бытовых, промышленных и ливневых сточных вод в
+                случаях, когда их самостоятельный отвод невозможен.
+              </p>
+
+              <h5 class="mt-4" style="color: var(--primary-blue)">
+                Материалы и технологии
+              </h5>
+              <ul class="features-list">
+                <li>Корпус из полипропилена промышленного класса</li>
+                <li>Высокая химическая и коррозионная стойкость</li>
+                <li>Расчет прочности под подземную установку</li>
+                <li>Современные методы сварки швов</li>
+              </ul>
+            </div>
+            <div class="col-lg-6">
+              <h5 style="color: var(--primary-blue)">Комплектация</h5>
+              <ul class="features-list">
+                <li>Насосы погружного типа</li>
+                <li>Фланцевые соединения</li>
+                <li>Технологические люки</li>
+                <li>Лестницы и площадки обслуживания</li>
+                <li>Датчики уровня и автоматика</li>
+                <li>Анкерные системы</li>
+              </ul>
+
+              <h5 class="mt-4" style="color: var(--primary-blue)">
+                Преимущества
+              </h5>
+              <ul class="features-list">
+                <li>Срок службы не менее 50 лет</li>
+                <li>Контроль качества на каждом этапе</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="text-center mt-5">
+            <button class="hero-btn" onclick="showApplicationFormForProduct()">
+              Подать заявку на этот продукт
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Application Form Modal -->
+    <div id="applicationModal" class="product-modal">
+      <div class="product-modal-content">
+        <div class="modal-header">
+          <h3>Заявка на продукцию</h3>
+          <button class="close-modal" onclick="closeApplicationModal()">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="modalApplicationForm">
+            <div class="mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="modalName"
+                placeholder="Ваше имя"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="tel"
+                class="form-control"
+                id="modalPhone"
+                placeholder="Ваш телефон"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <textarea
+                class="form-control"
+                id="modalComment"
+                rows="4"
+                placeholder="Комментарий или описание задачи"
+                required
+              ></textarea>
+            </div>
+            <input type="hidden" id="selectedProduct" value="" />
+            <input type="hidden" id="selectedService" value="" />
+            <button type="submit" class="submit-btn">
+              <span class="btn-text">Отправить заявку</span>
+              <span class="btn-loading" style="display: none">
+                <i class="fas fa-spinner fa-spin"></i> Отправка...
+              </span>
+            </button>
+          </form>
+
+          <div
+            id="modalSuccessMessage"
+            class="success-message mt-3"
+            style="display: none"
+          >
+            <i class="fas fa-check-circle me-2"></i> Ваша заявка отправлена! Мы
+            свяжемся с вами в ближайшее время.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // === НАСТРОЙКИ EMAILJS ===
+      (function () {
+        emailjs.init("GuD2XBC894z6ShpZu");
+      })();
+
+      const EMAILJS_CONFIG = {
+        SERVICE_ID: "tazau",
+        TEMPLATE_ID: "template_s1gw5fk",
+      };
+
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+      });
+
+      // Переменные для управления анимацией навигации
+      let navIndicator = null;
+      let isNavIndicatorInitialized = false;
+
+      // Функция для инициализации индикатора навигации
+      function initNavIndicator() {
+        navIndicator = document.getElementById('navIndicator');
+        if (navIndicator && !isNavIndicatorInitialized) {
+          isNavIndicatorInitialized = true;
+          
+          // Находим активную ссылку при загрузке
+          const activeLink = document.querySelector('.nav-link.active');
+          if (activeLink) {
+            updateNavIndicator(activeLink);
+          }
+        }
+      }
+
+      // Функция для обновления положения индикатора
+      function updateNavIndicator(activeElement) {
+        if (!navIndicator || !activeElement) return;
+        
+        const navItems = document.querySelectorAll('.nav-item:not(:has(.phone))');
+        let activeIndex = -1;
+        
+        // Находим индекс активного элемента
+        navItems.forEach((item, index) => {
+          if (item.querySelector('.nav-link.active')) {
+            activeIndex = index;
+          }
+        });
+        
+        if (activeIndex === -1) return;
+        
+        const activeItem = navItems[activeIndex];
+        const navLink = activeItem.querySelector('.nav-link');
+        
+        // Получаем координаты и размеры
+        const rect = navLink.getBoundingClientRect();
+        const navRect = activeItem.closest('.navbar-nav').getBoundingClientRect();
+        
+        // Устанавливаем позицию и размеры индикатора
+        navIndicator.style.width = `${rect.width}px`;
+        navIndicator.style.height = `${rect.height}px`;
+        navIndicator.style.transform = `translateX(${rect.left - navRect.left}px)`;
+        navIndicator.classList.add('visible');
+      }
+
+      // Функция для плавного обновления активного элемента
+      function updateActiveNavLinkSmoothly() {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(
+          ".navbar-nav .nav-link:not(.phone)"
+        );
+
+        let current = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.clientHeight;
+          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        // Находим текущую активную ссылку
+        let currentActiveLink = null;
+        navLinks.forEach((link) => {
+          if (link.classList.contains("active")) {
+            currentActiveLink = link;
+          }
+        });
+
+        // Находим новую активную ссылку
+        let newActiveLink = null;
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+            newActiveLink = link;
+          }
+        });
+
+        // Если наверху страницы, делаем "Главная" активной
+        if (scrollY < 100) {
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === "#home") {
+              link.classList.add("active");
+              newActiveLink = link;
+            }
+          });
+        }
+
+        // Обновляем индикатор только если активная ссылка изменилась
+        if (newActiveLink && newActiveLink !== currentActiveLink && window.innerWidth > 991) {
+          updateNavIndicator(newActiveLink);
+        }
+      }
+
+      // Product data
+      const products = {
+        kns: {
+          title: "Канализационные насосные станции (КНС)",
+          description:
+            "Канализационные насосные станции предназначены для перекачки хозяйственно-бытовых, промышленных и ливневых сточных вод в случаях, когда их самостоятельный отвод невозможен.",
+          features: [
+            "Корпус из полипропилена промышленного класса",
+            "Усиленная конструкция с ребрами жесткости",
+            "Срок службы не менее 50 лет",
+          ],
+          equipment: [
+            "Насосы погружного типа",
+            "Фланцевые соединения",
+            "Датчики уровня и автоматика",
+            "Анкерные системы",
+          ],
+        },
+        grease: {
+          title: "Жироуловители",
+          description:
+            "Жироуловители предназначены для очистки сточных вод от жиров, масел и нефтепродуктов. Широко применяются на предприятиях общественного питания, пищевой промышленности, автомойках.",
+          features: [
+            "Изготовлены из химически стойкого полипропилена",
+            "Многоступенчатая система очистки",
+            "Высокая эффективность очистки",
+            "Устойчивость к агрессивным средам",
+          ],
+          equipment: [
+            "Основная камера отстоя",
+            "Жиросборная камера",
+            "Съемные крышки для обслуживания",
+          ],
+        },
+        sand: {
+          title: "Пескоуловители",
+          description:
+            "Пескоуловители предназначены для очистки ливневых и промышленных сточных вод от песка, глины и других тяжелых минеральных примесей.",
+          features: [
+            "Высокая эффективность удаления тяжелых частиц",
+            "Устойчивость к абразивному износу",
+            "Долговечность - срок службы более 50 лет",
+            "Расчет под наземную и подземную установку",
+          ],
+          equipment: [
+            "Отстойная камера",
+            "Песчаный карман",
+            "Входные и выходные патрубки",
+            "Система перегородок",
+          ],
+        },
+        cleaning: {
+          title: "Очистные сооружения",
+          description:
+            "Комплексные решения для очистки хозяйственно-бытовых стоков с высокой эффективностью и надежностью.",
+          features: [
+            "Блочно-модульная конструкция",
+            "Высокая степень очистки стоков",
+            "Простота обслуживания",
+            "Компактные размеры",
+          ],
+          equipment: [
+            "Приемная камера",
+            "Аэротенки и отстойники",
+            "Автоматика управления",
+          ],
+        },
+        tanks: {
+          title: "Технологические емкости",
+          description:
+            "Емкости и корпуса из полипропилена для различных технологических процессов, хранения жидкостей и сырья.",
+          features: [
+            "Изготовление по индивидуальным параметрам",
+            "Различные объемы и конфигурации",
+            "Возможность установки датчиков и автоматики",
+          ],
+          equipment: [
+            "Крышки и люки",
+            "Лестницы и площадки",
+            "Фланцевые соединения",
+            "Анкерные системы",
+          ],
+        },
+        complex: {
+          title: "Комплектующие",
+          description:
+            "Полный спектр комплектующих и дополнительного оборудования для систем водоотведения и очистки.",
+          features: [
+            "Высокое качество материалов",
+            "Полная совместимость с нашим оборудованием",
+            "Долговечность и надежность",
+            "Широкий ассортимент",
+          ],
+          equipment: [
+            "Входные и выходные патрубки",
+            "Фланцевые соединения",
+            "Технологические люки",
+            "Лестницы и площадки обслуживания",
+            "Анкерные системы",
+          ],
+        },
+      };
+
+      // Функция для показа состояния отправки
+      function setButtonLoading(button, isLoading) {
+        const btnText = button.querySelector(".btn-text");
+        const btnLoading = button.querySelector(".btn-loading");
+
+        if (isLoading) {
+          btnText.style.display = "none";
+          btnLoading.style.display = "inline-block";
+          button.disabled = true;
+        } else {
+          btnText.style.display = "inline-block";
+          btnLoading.style.display = "none";
+          button.disabled = false;
+        }
+      }
+
+      // Gallery functions
+      function openGalleryModal(imageSrc, caption) {
+        document.getElementById('galleryModalImage').src = imageSrc;
+        document.getElementById('galleryModalCaption').innerHTML = caption;
+        document.getElementById('galleryModal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeGalleryModal() {
+        document.getElementById('galleryModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+
+      // Show product details modal
+      function showProductDetails(productId) {
+        const product = products[productId];
+
+        if (!product) {
+          document.getElementById("modalProductTitle").innerText =
+            "Продукция ТОО «Экопласт»";
+          document.getElementById("modalProductDescription").innerText =
+            "Индивидуальное проектирование и изготовление изделий из полипропилена для систем водоотведения и очистки.";
+
+          const modalBody = document.querySelector(".modal-body");
+          const oldContent = modalBody.querySelector(".row");
+
+          if (oldContent) {
+            oldContent.remove();
+          }
+
+          const newContent = document.createElement("div");
+          newContent.className = "row";
+          newContent.innerHTML = `
+                <div class="col-lg-6">
+                    <h5 style="color: var(--primary-blue);">Описание</h5>
+                    <p id="modalProductDescription">Индивидуальное проектирование и изготовление изделий из полипропилена для систем водоотведения и очистки.</p>
+                    
+                    <h5 class="mt-4" style="color: var(--primary-blue);">Материалы и технологии</h5>
+                    <ul class="features-list">
+                        <li>Индивидуальное проектирование</li>
+                        <li>Контроль качества на каждом этапе</li>
+                        <li>Собственное производство</li>
+                        <li>Срок службы не менее 50 лет</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <h5 style="color: var(--primary-blue);">Комплектация</h5>
+                    <ul class="features-list">
+                        <li>Насосы погружного типа</li>
+                        <li>Входные и выходные патрубки</li>
+                        <li>Фланцевые соединения</li>
+                        <li>Технологические люки</li>
+                        <li>Анкерные системы</li>
+                    </ul>
+                    
+                    <h5 class="mt-4" style="color: var(--primary-blue);">Преимущества</h5>
+                    <ul class="features-list">
+                        <li>Срок службы не менее 50 лет</li>
+                        <li>Контроль качества на каждом этапе</li>
+                    </ul>
+                </div>
+            `;
+
+          modalBody.insertBefore(
+            newContent,
+            modalBody.querySelector(".text-center")
+          );
+
+          document.getElementById("selectedProduct").value = "Общий запрос";
+        } else {
+          document.getElementById("modalProductTitle").innerText =
+            product.title;
+
+          const modalBody = document.querySelector(".modal-body");
+          const oldContent = modalBody.querySelector(".row");
+
+          if (oldContent) {
+            oldContent.remove();
+          }
+
+          const newContent = document.createElement("div");
+          newContent.className = "row";
+          newContent.innerHTML = `
+                <div class="col-lg-6">
+                    <h5 style="color: var(--primary-blue);">Описание</h5>
+                    <p id="modalProductDescription">${product.description}</p>
+                    
+                    <h5 class="mt-4" style="color: var(--primary-blue);">Характеристики</h5>
+                    <ul class="features-list">
+                        ${product.features
+                          .map((feature) => `<li>${feature}</li>`)
+                          .join("")}
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <h5 style="color: var(--primary-blue);">Комплектация</h5>
+                        <ul class="features-list">
+                            ${product.equipment
+                              .map((item) => `<li>${item}</li>`)
+                              .join("")}
+                        </ul>
+                        
+                        <h5 class="mt-4" style="color: var(--primary-blue);">Преимущества</h5>
+                        <ul class="features-list">
+                            <li>Срок службы не менее 50 лет</li>
+                            <li>Индивидуальное проектирование</li>
+                            <li>Контроль качества на каждом этапе</li>
+                        </ul>
+                    </div>
+                `;
+
+          modalBody.insertBefore(
+            newContent,
+            modalBody.querySelector(".text-center")
+          );
+
+          document.getElementById("selectedProduct").value = product.title;
+        }
+
+        document.getElementById("productModal").style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      // Close product modal
+      function closeProductModal() {
+        document.getElementById("productModal").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      // Show application form
+      function showApplicationForm() {
+        document.getElementById("applicationModal").style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      // Show application form for product
+      function showApplicationFormForProduct() {
+        closeProductModal();
+        setTimeout(() => {
+          showApplicationForm();
+        }, 300);
+      }
+
+      // Show application form for service
+      function showApplicationFormForService(serviceName) {
+        document.getElementById("selectedService").value = serviceName;
+        document.getElementById("modalComment").value = `Интересует услуга: ${serviceName}`;
+        showApplicationForm();
+      }
+
+      // Close application modal
+      function closeApplicationModal() {
+        document.getElementById("applicationModal").style.display = "none";
+        document.body.style.overflow = "auto";
+        document.getElementById("selectedService").value = "";
+      }
+
+      // Обработчик для основной формы
+      document
+        .getElementById("applicationForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const submitBtn = this.querySelector(".submit-btn");
+          setButtonLoading(submitBtn, true);
+
+          const templateParams = {
+            name: document.getElementById("name").value,
+            phone: document.getElementById("phone").value,
+            email: document.getElementById("email").value,
+            productType: document.getElementById("productType").value,
+            message: document.getElementById("message").value,
+            date: new Date().toLocaleString("ru-RU"),
+          };
+
+          try {
+            const response = await emailjs.send(
+              EMAILJS_CONFIG.SERVICE_ID,
+              EMAILJS_CONFIG.TEMPLATE_ID,
+              templateParams
+            );
+
+            if (response.status === 200) {
+              document.getElementById("successMessage").style.display = "block";
+              this.reset();
+
+              setTimeout(() => {
+                document.getElementById("successMessage").style.display = "none";
+              }, 5000);
+            }
+          } catch (error) {
+            console.error("Ошибка отправки:", error);
+            alert(
+              "Ошибка при отправке формы. Пожалуйста, позвоните нам по телефону."
+            );
+          } finally {
+            setButtonLoading(submitBtn, false);
+          }
+        });
+
+      // Обработчик для модальной формы
+      document
+        .getElementById("modalApplicationForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const submitBtn = this.querySelector(".submit-btn");
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+          submitBtn.disabled = true;
+
+          const templateParams = {
+            name: document.getElementById("modalName").value,
+            phone: document.getElementById("modalPhone").value,
+            product: document.getElementById("selectedProduct").value || document.getElementById("selectedService").value,
+            message: document.getElementById("modalComment").value,
+            date: new Date().toLocaleString("ru-RU"),
+            productType: document.getElementById("selectedProduct").value || document.getElementById("selectedService").value,
+            email: "не указан",
+          };
+
+          try {
+            const response = await emailjs.send(
+              EMAILJS_CONFIG.SERVICE_ID,
+              EMAILJS_CONFIG.TEMPLATE_ID,
+              templateParams
+            );
+
+            if (response.status === 200) {
+              document.getElementById("modalSuccessMessage").style.display =
+                "block";
+              this.reset();
+
+              setTimeout(() => {
+                document.getElementById("modalSuccessMessage").style.display = "none";
+                closeApplicationModal();
+              }, 3000);
+            }
+          } catch (error) {
+            console.error("Ошибка отправки:", error);
+            alert(
+              "Ошибка при отправке формы. Пожалуйста, позвоните нам по телефону."
+            );
+          } finally {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+          }
+        });
+
+      // Sticky header on scroll
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        if (window.scrollY > 50) {
+          header.classList.add("navbar-scrolled");
+        } else {
+          header.classList.remove("navbar-scrolled");
+        }
+
+        updateActiveNavLinkSmoothly();
+      });
+
+      // Update hero margin based on header height
+      document.addEventListener("DOMContentLoaded", function () {
+        const header = document.querySelector("header");
+        const hero = document.querySelector(".hero");
+        if (header && hero) {
+          const headerHeight = header.offsetHeight;
+          hero.style.marginTop = headerHeight + "px";
+        }
+
+        // Инициализируем индикатор навигации
+        setTimeout(() => {
+          initNavIndicator();
+          updateActiveNavLinkSmoothly();
+        }, 100);
+      });
+
+      // Smooth scrolling for navigation links with indicator animation
+      document.querySelectorAll('a.nav-link[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            // Обновляем индикатор перед скроллом
+            if (window.innerWidth > 991) {
+              updateNavIndicator(this);
+            }
+
+            // Удаляем активный класс у всех ссылок (кроме телефона)
+            document
+              .querySelectorAll(".nav-link:not(.phone)")
+              .forEach((link) => {
+                link.classList.remove("active");
+              });
+
+            // Добавляем активный класс к кликнутой ссылке
+            this.classList.add("active");
+
+            // Плавный скролл к элементу
+            const headerHeight = document.querySelector("header").offsetHeight;
+            window.scrollTo({
+              top: targetElement.offsetTop - headerHeight,
+              behavior: "smooth",
+            });
+
+            // Закрываем мобильное меню, если оно открыто
+            const navbarCollapse = document.querySelector(".navbar-collapse");
+            if (navbarCollapse && navbarCollapse.classList.contains("show")) {
+              const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+              bsCollapse.hide();
+            }
+          }
+        });
+      });
+
+      // Close modals when clicking outside
+      window.addEventListener("click", function (e) {
+        if (e.target.id === "productModal") {
+          closeProductModal();
+        }
+        if (e.target.id === "applicationModal") {
+          closeApplicationModal();
+        }
+        if (e.target.id === "galleryModal") {
+          closeGalleryModal();
+        }
+      });
+
+      // Обновляем индикатор при изменении размера окна
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 991) {
+          initNavIndicator();
+          const activeLink = document.querySelector('.nav-link.active');
+          if (activeLink) {
+            updateNavIndicator(activeLink);
+          }
+        } else {
+          if (navIndicator) {
+            navIndicator.classList.remove('visible');
+          }
+        }
+      });
+
+      // Инициализация при полной загрузке страницы
+      window.addEventListener('load', function() {
+        initNavIndicator();
+        updateActiveNavLinkSmoothly();
+      });
+    </script>
+</body>
+</html>

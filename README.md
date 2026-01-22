@@ -1,1 +1,1 @@
-# tazaukz
+# Tazau.kz
